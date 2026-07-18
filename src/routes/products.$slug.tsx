@@ -82,21 +82,7 @@ function ProductPage() {
       </div>
 
       <section className="mx-auto max-w-7xl px-4 sm:px-6 py-8 sm:py-12 grid lg:grid-cols-2 gap-8 lg:gap-14">
-        <div className="relative animate-fade-in">
-          <div className="absolute -inset-4 sm:-inset-6 bg-[var(--rose)]/25 rounded-[2rem] -z-10 rotate-1" />
-          <button
-            type="button"
-            onClick={() => setZoom(true)}
-            className="block w-full rounded-[1.5rem] overflow-hidden shadow-2xl shadow-[var(--rose)]/40"
-          >
-            <img
-              src={product.image}
-              alt={product.title}
-              className="w-full h-auto object-cover transition-transform duration-700 hover:scale-105"
-            />
-          </button>
-          <p className="mt-3 text-center text-xs uppercase tracking-widest text-muted-foreground">Tap image to zoom</p>
-        </div>
+        <ProductGallery src={product.image} alt={product.title} />
 
         <div className="space-y-6 animate-fade-in">
           <div>
