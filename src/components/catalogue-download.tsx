@@ -183,9 +183,13 @@ export function CatalogueDownloadDialog({ productTitle, productImage, onClose, m
                   <path d="M5 12l5 5L20 7" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </div>
-              <h4 className="font-display text-2xl">Catalogue sent!</h4>
+              <h4 className="font-display text-2xl">{mode === "unlock" ? "Catalogue unlocked!" : "Catalogue sent!"}</h4>
               <p className="text-sm text-muted-foreground leading-relaxed">
-                We've sent the <b>{productTitle}</b> catalogue to WhatsApp on <b>+91 {phone}</b>. It should also download automatically to this device.
+                {mode === "unlock" ? (
+                  <>All designs are now unlocked on this device, and the full <b>{productTitle}</b> catalogue is on its way to WhatsApp on <b>+91 {phone}</b>.</>
+                ) : (
+                  <>We've sent the <b>{productTitle}</b> catalogue to WhatsApp on <b>+91 {phone}</b>. It should also download automatically to this device.</>
+                )}
               </p>
               <button
                 onClick={onClose}
