@@ -83,7 +83,12 @@ function ProductPage() {
       </div>
 
       <section className="mx-auto max-w-7xl px-4 sm:px-6 py-8 sm:py-12 grid lg:grid-cols-2 gap-8 lg:gap-14">
-        <ProductGallery images={productPages[product.slug] ?? [product.image]} alt={product.title} />
+        <ProductGallery
+          images={productPages[product.slug] ?? [product.image]}
+          alt={product.title}
+          productTitle={product.title}
+          productImage={product.image}
+        />
 
         <div className="space-y-6 animate-fade-in">
           <div>
