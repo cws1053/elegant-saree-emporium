@@ -164,22 +164,55 @@ function ProductPage() {
         </div>
       </section>
 
+      <section className="mx-auto max-w-7xl px-4 sm:px-6 pb-14">
+        <div className="rounded-3xl bg-[var(--ink)] text-[var(--ivory)] px-6 sm:px-10 py-8 sm:py-10 grid md:grid-cols-[1fr_auto] gap-6 items-center">
+          <div>
+            <p className="text-[10px] uppercase tracking-[0.35em] text-[var(--gold)]">Take it with you</p>
+            <h3 className="font-display text-2xl sm:text-3xl mt-2 leading-tight">
+              Full catalogue of <span className="text-[var(--rose)]">{product.title}</span> on your WhatsApp
+            </h3>
+            <p className="mt-2 text-sm text-[var(--ivory)]/75 max-w-xl">
+              Verify your number with a one-time code and we'll send the complete design sheet — every color, price, and dispatch detail — directly on WhatsApp.
+            </p>
+          </div>
+          <div className="flex flex-col sm:flex-row md:flex-col gap-3 md:min-w-[220px]">
+            <button
+              onClick={() => setShowDownload(true)}
+              className="flex items-center justify-center gap-2 rounded-full bg-[var(--gold)] hover:bg-[var(--gold)]/90 text-[var(--ink)] text-sm font-medium tracking-wide py-3 px-6 transition-colors hover-scale"
+            >
+              <DownloadIcon /> Download Catalogue
+            </button>
+            <a
+              href={waLink(message)}
+              target="_blank"
+              rel="noreferrer"
+              className="flex items-center justify-center gap-2 rounded-full bg-[#25D366] hover:bg-[#1ea952] text-white text-sm font-medium tracking-wide py-3 px-6 transition-colors hover-scale"
+            >
+              <WhatsAppIcon /> Enquire Now
+            </a>
+          </div>
+        </div>
+      </section>
+
       <Footer />
 
-      {zoom && (
-        <div
-          className="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm grid place-items-center p-4 animate-fade-in"
-          onClick={() => setZoom(false)}
-        >
-          <img src={product.image} alt={product.title} className="max-h-[90vh] max-w-full rounded-lg" />
-          <button
-            className="absolute top-4 right-4 h-10 w-10 rounded-full bg-white/90 text-[var(--ink)] grid place-items-center"
-            aria-label="Close"
-          >
-            ✕
-          </button>
-        </div>
+      {showDownload && (
+        <CatalogueDownloadDialog
+          productTitle={product.title}
+          productImage={product.image}
+          onClose={() => setShowDownload(false)}
+        />
       )}
     </div>
+  );
+}
+
+function DownloadIcon() {
+  return (
+    <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+      <polyline points="7 10 12 15 17 10" />
+      <line x1="12" y1="15" x2="12" y2="3" />
+    </svg>
   );
 }
