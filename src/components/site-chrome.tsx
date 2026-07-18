@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { useState } from "react";
-import logo from "@/assets/devrani-logo.jpg.asset.json";
+import logo from "@/assets/devrani-logo.png.asset.json";
 import { WHATSAPP_DISPLAY, waLink } from "@/lib/wa";
 import { LanguageSwitcher, useI18n } from "@/i18n";
 
