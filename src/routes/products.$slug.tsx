@@ -4,6 +4,8 @@ import { getProduct } from "@/lib/product-details";
 import { products } from "@/data/products";
 import { TopBar, Nav, Footer, WhatsAppIcon, ProductCard } from "@/components/site-chrome";
 import { waLink } from "@/lib/wa";
+import { ProductGallery } from "@/components/product-gallery";
+import { CatalogueDownloadDialog } from "@/components/catalogue-download";
 
 export const Route = createFileRoute("/products/$slug")({
   component: ProductPage,
@@ -44,7 +46,7 @@ export const Route = createFileRoute("/products/$slug")({
 function ProductPage() {
   const { product } = Route.useLoaderData();
   const [qty, setQty] = useState(1);
-  const [zoom, setZoom] = useState(false);
+  const [showDownload, setShowDownload] = useState(false);
 
   const message =
     `Namaste Devrani,\n\nI'd like to enquire about:\n` +
