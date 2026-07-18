@@ -217,14 +217,30 @@ function Wholesale() {
   ];
   return (
     <section id="wholesale" className="bg-[var(--rose)]/25 py-16 sm:py-24">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6">
-        <div className="max-w-2xl mb-10 sm:mb-14 animate-fade-in">
-          <span className="text-xs uppercase tracking-[0.3em] text-[var(--gold)]">Wholesale Programme</span>
-          <h2 className="font-display text-3xl sm:text-5xl mt-3">Priced by the color set.</h2>
-          <p className="text-muted-foreground mt-4">
-            Every design is one indivisible color set. Order one, three, or ten — the full range ships together.
-          </p>
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 space-y-10 sm:space-y-14">
+        {/* Editorial dark CTA */}
+        <div className="relative bg-[var(--ink)] text-[var(--ivory)] rounded-2xl p-8 sm:p-14 text-center border border-[var(--gold)]/40 overflow-hidden animate-fade-in">
+          <div className="absolute -top-16 -right-16 w-48 h-48 rounded-full bg-[var(--gold)]/10" />
+          <div className="absolute -bottom-20 -left-20 w-56 h-56 rounded-full bg-[var(--rose)]/10" />
+          <div className="relative">
+            <p className="text-[var(--gold)] text-[10px] sm:text-xs uppercase tracking-[0.3em] font-bold mb-3">
+              Partner with Devrani
+            </p>
+            <h2 className="font-display italic text-3xl sm:text-5xl mb-4 text-[var(--gold)]">Priced by the color set.</h2>
+            <p className="text-[var(--ivory)]/70 text-sm sm:text-base max-w-xl mx-auto leading-relaxed mb-8">
+              Apply for wholesale access — browse our masterweaver catalogues, unlock per-set pricing, and get direct WhatsApp support.
+            </p>
+            <a
+              href={waLink("Namaste Devrani, I'd like to register as a retail partner.")}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-2 rounded-full bg-[var(--gold)] text-[var(--ink)] px-8 py-4 text-[11px] sm:text-xs uppercase tracking-[0.2em] font-bold hover:bg-[var(--rose)] transition-colors hover-scale"
+            >
+              Register Retail Account
+            </a>
+          </div>
         </div>
+
         <div className="grid md:grid-cols-3 gap-4 sm:gap-6">
           {tiers.map((t) => (
             <div key={t.name} className="bg-[var(--ivory)] rounded-2xl p-6 sm:p-8 border border-[var(--gold)]/30 hover:-translate-y-1 hover:shadow-xl transition-all">
