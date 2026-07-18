@@ -57,14 +57,21 @@ export function CatalogueDownloadDialog({ productTitle, productImage, onClose, m
     }
     setSending(true);
     await new Promise((r) => setTimeout(r, 600));
-    // Trigger download
-    const a = document.createElement("a");
-    a.href = productImage;
-    a.download = `${productTitle.replace(/\s+/g, "-").toLowerCase()}-devrani-catalogue.jpg`;
-    a.target = "_blank";
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
+    // Persist unlock across the site
+    try {
+      window.localStorage.setItem(UNLOCK_KEY, "1");
+      window.dispatchEvent(new Event(UNLOCK_EVENT));
+    } catch {}
+    if (mode === "download") {
+      const a = document.createElement("a");
+      a.href = productImage;
+      a.download = `${productTitle.replace(/\s+/g, "-").toLowerCase()}-devrani-catalogue.jpg`;
+      a.target = "_blank";
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+    }
+    onVerified?.();
     setSending(false);
     setStep("done");
   };
