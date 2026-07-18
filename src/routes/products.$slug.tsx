@@ -6,6 +6,7 @@ import { TopBar, Nav, Footer, WhatsAppIcon, ProductCard } from "@/components/sit
 import { waLink } from "@/lib/wa";
 import { ProductGallery } from "@/components/product-gallery";
 import { CatalogueDownloadDialog } from "@/components/catalogue-download";
+import { productPages } from "@/data/product-pages";
 
 export const Route = createFileRoute("/products/$slug")({
   component: ProductPage,
@@ -82,7 +83,7 @@ function ProductPage() {
       </div>
 
       <section className="mx-auto max-w-7xl px-4 sm:px-6 py-8 sm:py-12 grid lg:grid-cols-2 gap-8 lg:gap-14">
-        <ProductGallery src={product.image} alt={product.title} />
+        <ProductGallery images={productPages[product.slug] ?? [product.image]} alt={product.title} />
 
         <div className="space-y-6 animate-fade-in">
           <div>
