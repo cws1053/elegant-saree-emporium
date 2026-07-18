@@ -17,6 +17,8 @@ type Props = {
 };
 
 type Step = "phone" | "otp" | "done";
+
+export function CatalogueDownloadDialog({ productTitle, productImage, onClose, mode = "download", onVerified }: Props) {
   const [step, setStep] = useState<Step>("phone");
   const [phone, setPhone] = useState("");
   const [otp, setOtp] = useState("");
