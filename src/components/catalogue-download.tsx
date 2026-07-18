@@ -1,14 +1,22 @@
 import { useEffect, useRef, useState } from "react";
 
+export const UNLOCK_KEY = "devrani:catalogue-unlocked";
+export const UNLOCK_EVENT = "devrani:catalogue-unlocked";
+
+export function isCatalogueUnlocked() {
+  if (typeof window === "undefined") return false;
+  return window.localStorage.getItem(UNLOCK_KEY) === "1";
+}
+
 type Props = {
   productTitle: string;
   productImage: string;
   onClose: () => void;
+  mode?: "download" | "unlock";
+  onVerified?: () => void;
 };
 
 type Step = "phone" | "otp" | "done";
-
-export function CatalogueDownloadDialog({ productTitle, productImage, onClose }: Props) {
   const [step, setStep] = useState<Step>("phone");
   const [phone, setPhone] = useState("");
   const [otp, setOtp] = useState("");
