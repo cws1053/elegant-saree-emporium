@@ -3,35 +3,19 @@ import logo from "@/assets/devrani-logo.jpg.asset.json";
 import heroSaree from "@/assets/hero-saree.jpg";
 import sareesStack from "@/assets/sarees-stack.jpg";
 import detailZari from "@/assets/detail-zari.jpg";
-import collectionSage from "@/assets/collection-sage.jpg";
-import collectionIvory from "@/assets/collection-ivory.jpg";
-import collectionRose from "@/assets/collection-rose.jpg";
-import { useState } from "react";
+import { useMemo, useState } from "react";
+import { products } from "@/data/products";
 
 export const Route = createFileRoute("/")({
   component: Index,
 });
 
-const collections = [
-  {
-    name: "Gulaab",
-    tag: "Dusty Rose Silk",
-    desc: "Soft-hand silk with a whisper of gold zari. Bridal registers and boutique shelves.",
-    img: collectionRose,
-  },
-  {
-    name: "Vanika",
-    tag: "Sage Kanjivaram",
-    desc: "Muted mint-sage weave with a bold gold border. A modern take on a classic.",
-    img: collectionSage,
-  },
-  {
-    name: "Chandni",
-    tag: "Ivory Banarasi",
-    desc: "Creamy ivory silk, hand-motif buti, delicate gold pallu. Ceremony ready.",
-    img: collectionIvory,
-  },
-];
+const WHATSAPP_NUMBER = "918799279283";
+const WHATSAPP_DISPLAY = "+91 87992 79283";
+
+function waLink(text: string) {
+  return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
+}
 
 function Index() {
   return (
@@ -39,9 +23,10 @@ function Index() {
       <TopBar />
       <Nav />
       <Hero />
+      <ColorSetBanner />
       <Marquee />
       <Story />
-      <Collections />
+      <Catalogue />
       <Craft />
       <Wholesale />
       <Enquire />
@@ -55,7 +40,7 @@ function TopBar() {
     <div className="bg-[var(--ink)] text-[var(--ivory)] text-[11px] tracking-[0.22em] uppercase">
       <div className="mx-auto max-w-7xl px-6 py-2 flex flex-wrap items-center justify-between gap-2">
         <span>जय श्री श्याम · साड़ियों का मायका</span>
-        <span className="hidden sm:inline">B2B Wholesale · MOQ from 12 pcs · Pan-India dispatch</span>
+        <span className="hidden sm:inline">Full color set dispatch · B2B Wholesale · Pan-India</span>
       </div>
     </div>
   );
@@ -69,16 +54,18 @@ function Nav() {
           <img src={logo.url} alt="Devrani Saree Pvt. Ltd." className="h-12 w-auto" />
         </a>
         <nav className="hidden md:flex items-center gap-9 text-sm tracking-wide">
-          <a href="#collections" className="hover:text-[var(--gold)] transition-colors">Collections</a>
+          <a href="#catalogue" className="hover:text-[var(--gold)] transition-colors">Catalogue</a>
           <a href="#craft" className="hover:text-[var(--gold)] transition-colors">The Craft</a>
           <a href="#wholesale" className="hover:text-[var(--gold)] transition-colors">Wholesale</a>
           <a href="#enquire" className="hover:text-[var(--gold)] transition-colors">Contact</a>
         </nav>
         <a
-          href="#enquire"
+          href={waLink("Namaste, I'd like to receive the Devrani catalogue.")}
+          target="_blank"
+          rel="noreferrer"
           className="hidden md:inline-flex items-center gap-2 rounded-full border border-[var(--gold)] bg-transparent px-5 py-2 text-sm tracking-wide text-[var(--ink)] hover:bg-[var(--gold)] hover:text-white transition-colors"
         >
-          Request Catalogue
+          Enquire on WhatsApp
         </a>
       </div>
     </header>
@@ -94,26 +81,31 @@ function Hero() {
             <span className="h-px w-8 bg-[var(--gold)]" /> Est. Wholesale House
           </span>
           <h1 className="font-display text-5xl md:text-7xl leading-[1.02] text-[var(--ink)]">
-            Heirloom sarees,<br />
-            <em className="not-italic text-[var(--gold)]">wholesale-ready.</em>
+            Full color sets,<br />
+            <em className="not-italic text-[var(--gold)]">every catalogue.</em>
           </h1>
           <p className="text-lg text-muted-foreground max-w-lg leading-relaxed">
-            Devrani is a boutique B2B saree house from the heart of India — dressing retailers,
-            designers and family stores in weaves that carry the softness of home.
+            Devrani is a boutique B2B saree house from Surat — every design ships as a{" "}
+            <em>complete color set</em>, packed and dispatched together. One enquiry, one carton, one price.
           </p>
           <div className="flex flex-wrap gap-3">
-            <a href="#collections" className="rounded-full bg-[var(--ink)] px-7 py-3 text-sm tracking-wide text-[var(--ivory)] hover:bg-[var(--gold)] transition-colors">
-              Explore Collections
+            <a href="#catalogue" className="rounded-full bg-[var(--ink)] px-7 py-3 text-sm tracking-wide text-[var(--ivory)] hover:bg-[var(--gold)] transition-colors">
+              Browse {products.length} Designs
             </a>
-            <a href="#enquire" className="rounded-full border border-[var(--ink)] px-7 py-3 text-sm tracking-wide hover:bg-[var(--ink)] hover:text-[var(--ivory)] transition-colors">
-              Become a Stockist
+            <a
+              href={waLink("Namaste Devrani, please share the full price list.")}
+              target="_blank"
+              rel="noreferrer"
+              className="rounded-full border border-[var(--ink)] px-7 py-3 text-sm tracking-wide hover:bg-[var(--ink)] hover:text-[var(--ivory)] transition-colors"
+            >
+              WhatsApp Price List
             </a>
           </div>
           <dl className="grid grid-cols-3 gap-6 pt-8 border-t border-border max-w-md">
             {[
-              ["1200+", "Retail partners"],
+              [`${products.length}+`, "Live designs"],
+              ["Full", "Color sets"],
               ["48hr", "Dispatch"],
-              ["120+", "Live designs"],
             ].map(([k, v]) => (
               <div key={v}>
                 <dt className="font-display text-3xl text-[var(--gold)]">{k}</dt>
@@ -126,18 +118,32 @@ function Hero() {
           <div className="absolute -inset-8 bg-[var(--rose)]/25 rounded-[2rem] -z-10 rotate-2" />
           <img
             src={heroSaree}
-            alt="Model draped in a dusty rose Devrani silk saree"
+            alt="Model draped in a Devrani silk saree"
             width={1400}
             height={1600}
             className="rounded-[1.5rem] w-full object-cover shadow-2xl shadow-[var(--rose)]/40"
           />
           <div className="absolute -bottom-6 -left-6 bg-[var(--ivory)] border border-[var(--gold)]/40 rounded-2xl px-5 py-4 shadow-lg">
-            <p className="font-display text-xl text-[var(--ink)]">Gulaab No. 07</p>
-            <p className="text-xs uppercase tracking-widest text-muted-foreground">Dusty Rose · Pure Silk</p>
+            <p className="font-display text-xl text-[var(--ink)]">Full Set Dispatch</p>
+            <p className="text-xs uppercase tracking-widest text-muted-foreground">All colors · One carton</p>
           </div>
         </div>
       </div>
     </section>
+  );
+}
+
+function ColorSetBanner() {
+  return (
+    <div className="bg-[var(--gold)] text-white">
+      <div className="mx-auto max-w-7xl px-6 py-4 flex flex-wrap items-center justify-center gap-3 text-center text-sm md:text-base tracking-wide">
+        <span className="font-display text-xl md:text-2xl">✦</span>
+        <p>
+          <strong className="font-display text-lg md:text-xl mr-2">Please note —</strong>
+          We dispatch every design as a <em>full color set</em>. Single-piece orders are not accepted.
+        </p>
+      </div>
+    </div>
   );
 }
 
@@ -169,11 +175,11 @@ function Story() {
         <p className="text-muted-foreground leading-relaxed">
           <em className="not-italic">Devrani</em> means the younger sister-in-law — a keeper of tradition
           and a bringer of warmth. Our tagline, <em>साड़ियों का मायका</em> — a mother's home for sarees —
-          reflects the care with which every weave is chosen, folded and sent on its way to your store.
+          reflects the care with which every design is stitched, boxed and sent on its way to your store.
         </p>
         <p className="text-muted-foreground leading-relaxed">
-          We work directly with weaver clusters in Varanasi, Kanchipuram, Chanderi and Surat, translating
-          heritage techniques into a curated boutique catalogue built for the modern retail floor.
+          Every catalogue you see below ships as the <strong>complete color set</strong>. Choose your set
+          quantity, tell us on WhatsApp, and we'll pack the full range together.
         </p>
         <div className="gold-rule" />
       </div>
@@ -181,44 +187,126 @@ function Story() {
   );
 }
 
-function Collections() {
+function Catalogue() {
+  const [query, setQuery] = useState("");
+  const filtered = useMemo(
+    () => products.filter((p) => p.title.toLowerCase().includes(query.toLowerCase())),
+    [query],
+  );
   return (
-    <section id="collections" className="bg-[var(--sage)]/12 py-24">
+    <section id="catalogue" className="bg-[var(--sage)]/12 py-24">
       <div className="mx-auto max-w-7xl px-6">
-        <div className="flex flex-wrap items-end justify-between gap-6 mb-14">
+        <div className="flex flex-wrap items-end justify-between gap-6 mb-10">
           <div>
-            <span className="text-xs uppercase tracking-[0.3em] text-[var(--gold)]">Featured Collections</span>
-            <h2 className="font-display text-4xl md:text-5xl mt-3 max-w-xl">Weaves in season, ready to ship.</h2>
+            <span className="text-xs uppercase tracking-[0.3em] text-[var(--gold)]">Live Catalogue</span>
+            <h2 className="font-display text-4xl md:text-5xl mt-3 max-w-xl">
+              {products.length} designs — every one a full color set.
+            </h2>
+            <p className="text-sm text-muted-foreground mt-3 max-w-lg">
+              Pick a set quantity and tap Inquire — a pre-filled WhatsApp message opens instantly.
+            </p>
           </div>
-          <a href="#enquire" className="text-sm underline underline-offset-8 decoration-[var(--gold)] hover:text-[var(--gold)]">
-            Request full lookbook →
-          </a>
+          <input
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder="Search designs…"
+            className="rounded-full border border-[var(--gold)]/40 bg-[var(--ivory)] px-5 py-3 text-sm outline-none focus:border-[var(--gold)] w-full sm:w-72"
+          />
         </div>
-        <div className="grid md:grid-cols-3 gap-8">
-          {collections.map((c) => (
-            <article key={c.name} className="group bg-[var(--ivory)] rounded-2xl overflow-hidden border border-border hover:border-[var(--gold)] transition-colors">
-              <div className="aspect-[4/5] overflow-hidden">
-                <img src={c.img} alt={`${c.name} — ${c.tag}`} width={900} height={1100} loading="lazy" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
-              </div>
-              <div className="p-6 space-y-2">
-                <p className="text-[11px] uppercase tracking-[0.25em] text-[var(--gold)]">{c.tag}</p>
-                <h3 className="font-display text-2xl">{c.name}</h3>
-                <p className="text-sm text-muted-foreground">{c.desc}</p>
-              </div>
-            </article>
+
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          {filtered.map((p) => (
+            <ProductCard key={p.slug} product={p} />
           ))}
         </div>
+        {filtered.length === 0 && (
+          <p className="text-center text-muted-foreground py-16">No designs match "{query}".</p>
+        )}
       </div>
     </section>
+  );
+}
+
+function ProductCard({ product }: { product: { slug: string; title: string; image: string } }) {
+  const [qty, setQty] = useState(1);
+  const message =
+    `Namaste Devrani,\n\nI'd like to enquire about:\n` +
+    `• Design: ${product.title}\n` +
+    `• Quantity: ${qty} full color set${qty > 1 ? "s" : ""}\n\n` +
+    `Please share price and availability. Thank you.`;
+  return (
+    <article className="group bg-[var(--ivory)] rounded-2xl overflow-hidden border border-border hover:border-[var(--gold)] transition-colors flex flex-col">
+      <div className="aspect-[3/4] overflow-hidden bg-[var(--sage)]/10">
+        <img
+          src={product.image}
+          alt={product.title}
+          loading="lazy"
+          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+        />
+      </div>
+      <div className="p-4 flex-1 flex flex-col gap-3">
+        <div>
+          <p className="text-[10px] uppercase tracking-[0.25em] text-[var(--gold)]">Devrani Design</p>
+          <h3 className="font-display text-xl mt-1 leading-tight">{product.title}</h3>
+          <p className="text-[11px] text-muted-foreground mt-1">Full color set · dispatched together</p>
+        </div>
+        <div className="mt-auto space-y-2">
+          <label className="flex items-center gap-3 text-xs text-muted-foreground">
+            <span className="uppercase tracking-widest">Sets</span>
+            <div className="flex items-center border border-border rounded-full overflow-hidden">
+              <button
+                type="button"
+                onClick={() => setQty((q) => Math.max(1, q - 1))}
+                aria-label="Decrease quantity"
+                className="px-3 py-1 hover:bg-[var(--sage)]/20"
+              >
+                −
+              </button>
+              <input
+                type="number"
+                min={1}
+                value={qty}
+                onChange={(e) => setQty(Math.max(1, Number(e.target.value) || 1))}
+                className="w-12 text-center bg-transparent py-1 text-sm outline-none"
+              />
+              <button
+                type="button"
+                onClick={() => setQty((q) => q + 1)}
+                aria-label="Increase quantity"
+                className="px-3 py-1 hover:bg-[var(--sage)]/20"
+              >
+                +
+              </button>
+            </div>
+          </label>
+          <a
+            href={waLink(message)}
+            target="_blank"
+            rel="noreferrer"
+            className="flex items-center justify-center gap-2 rounded-full bg-[#25D366] hover:bg-[#1ea952] text-white text-xs font-medium tracking-wide py-2.5 transition-colors"
+          >
+            <WhatsAppIcon /> Inquire on WhatsApp
+          </a>
+        </div>
+      </div>
+    </article>
+  );
+}
+
+function WhatsAppIcon() {
+  return (
+    <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden>
+      <path d="M17.5 14.4c-.3-.1-1.7-.9-2-1s-.5-.1-.7.2-.8 1-1 1.2-.4.2-.7.1a8 8 0 0 1-2.4-1.5 9 9 0 0 1-1.6-2c-.2-.3 0-.5.1-.6l.5-.6.3-.5V9c0-.1-.7-1.7-1-2.3s-.5-.5-.7-.5H7.6c-.2 0-.5.1-.8.4a2.9 2.9 0 0 0-.9 2.2c0 1.3.9 2.5 1 2.7s1.9 2.9 4.6 4.1c.6.3 1.1.4 1.5.5.6.2 1.2.2 1.7.1.5-.1 1.6-.6 1.8-1.3s.3-1.2.2-1.3-.3-.2-.6-.3zM12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2z" />
+    </svg>
   );
 }
 
 function Craft() {
   const rows = [
     { k: "01", t: "Sourced with intent", d: "Direct partnerships with weaver clusters in Banaras, Kanchipuram, Chanderi and Surat." },
-    { k: "02", t: "Boutique curation", d: "Every design vetted against a season-tight palette — no clutter on your shelves." },
-    { k: "03", t: "Quality controlled", d: "Two-stage inspection, GSM verified, colour-fastness tested before every dispatch." },
-    { k: "04", t: "Retailer-first pricing", d: "Transparent wholesale margins, tiered slabs and easy replenishment cycles." },
+    { k: "02", t: "Full color set model", d: "Every design ships as the complete color range — no single-piece breakage." },
+    { k: "03", t: "Quality controlled", d: "Two-stage inspection and colour-fastness tested before every dispatch." },
+    { k: "04", t: "Retailer-first pricing", d: "Transparent per-set pricing on WhatsApp, easy replenishment cycles." },
   ];
   return (
     <section id="craft" className="mx-auto max-w-7xl px-6 py-24 grid md:grid-cols-12 gap-14">
@@ -248,17 +336,19 @@ function Craft() {
 
 function Wholesale() {
   const tiers = [
-    { name: "Boutique", min: "12 pcs", note: "For independent stores exploring the range." },
-    { name: "Retail Partner", min: "48 pcs", note: "Priority stock, seasonal previews, replenishment." },
-    { name: "Distributor", min: "200 pcs", note: "Territory-based pricing and dedicated account manager." },
+    { name: "Boutique", min: "1 set", note: "One full color set per design — try a range." },
+    { name: "Retail Partner", min: "3 sets", note: "Mix designs across sets, priority stock and previews." },
+    { name: "Distributor", min: "10 sets", note: "Territory pricing and a dedicated account manager." },
   ];
   return (
     <section id="wholesale" className="bg-[var(--rose)]/25 py-24">
       <div className="mx-auto max-w-7xl px-6">
         <div className="max-w-2xl mb-14">
           <span className="text-xs uppercase tracking-[0.3em] text-[var(--gold)]">Wholesale Programme</span>
-          <h2 className="font-display text-4xl md:text-5xl mt-3">Built around how you sell.</h2>
-          <p className="text-muted-foreground mt-4">Three simple tiers, one honest price list. Choose the fit for your store and grow into the next.</p>
+          <h2 className="font-display text-4xl md:text-5xl mt-3">Priced by the color set.</h2>
+          <p className="text-muted-foreground mt-4">
+            Every design is one indivisible color set. Order one, three, or ten — the full range ships together.
+          </p>
         </div>
         <div className="grid md:grid-cols-3 gap-6">
           {tiers.map((t) => (
@@ -278,58 +368,38 @@ function Wholesale() {
 }
 
 function Enquire() {
-  const [sent, setSent] = useState(false);
   return (
     <section id="enquire" className="mx-auto max-w-6xl px-6 py-24 grid md:grid-cols-2 gap-14">
       <div className="space-y-6">
         <span className="text-xs uppercase tracking-[0.3em] text-[var(--gold)]">Get in Touch</span>
-        <h2 className="font-display text-4xl md:text-5xl leading-tight">Request the catalogue.</h2>
-        <p className="text-muted-foreground max-w-md">Tell us a little about your store. We'll share the current lookbook, price list and MOQ details within one working day.</p>
+        <h2 className="font-display text-4xl md:text-5xl leading-tight">One tap on WhatsApp.</h2>
+        <p className="text-muted-foreground max-w-md">
+          Our trade desk replies in minutes on WhatsApp with the latest lookbook, per-set price and dispatch timeline.
+        </p>
         <div className="space-y-3 pt-4 text-sm">
-          <p><span className="text-[var(--gold)] uppercase tracking-widest text-xs">Trade Desk</span><br />+91 00000 00000</p>
-          <p><span className="text-[var(--gold)] uppercase tracking-widest text-xs">Email</span><br />trade@devranisaree.com</p>
+          <p><span className="text-[var(--gold)] uppercase tracking-widest text-xs">WhatsApp</span><br />{WHATSAPP_DISPLAY}</p>
           <p><span className="text-[var(--gold)] uppercase tracking-widest text-xs">Showroom</span><br />Surat, Gujarat · India</p>
         </div>
       </div>
-      <form
-        onSubmit={(e) => { e.preventDefault(); setSent(true); }}
-        className="bg-[var(--ivory)] border border-border rounded-2xl p-8 space-y-4"
-      >
-        {sent ? (
-          <div className="text-center py-16 space-y-3">
-            <p className="font-display text-3xl text-[var(--gold)]">धन्यवाद</p>
-            <p className="text-muted-foreground">We'll reach out within one working day.</p>
-          </div>
-        ) : (
-          <>
-            {[
-              { n: "name", p: "Your name", t: "text" },
-              { n: "store", p: "Store / Company", t: "text" },
-              { n: "city", p: "City", t: "text" },
-              { n: "phone", p: "Phone / WhatsApp", t: "tel" },
-              { n: "email", p: "Email", t: "email" },
-            ].map((f) => (
-              <input
-                key={f.n}
-                name={f.n}
-                type={f.t}
-                required
-                placeholder={f.p}
-                className="w-full bg-transparent border-b border-border py-3 text-sm outline-none focus:border-[var(--gold)] transition-colors"
-              />
-            ))}
-            <textarea
-              name="msg"
-              rows={3}
-              placeholder="Tell us about your store"
-              className="w-full bg-transparent border-b border-border py-3 text-sm outline-none focus:border-[var(--gold)] transition-colors resize-none"
-            />
-            <button className="w-full rounded-full bg-[var(--ink)] text-[var(--ivory)] py-3 text-sm tracking-wide hover:bg-[var(--gold)] transition-colors">
-              Send Enquiry
-            </button>
-          </>
-        )}
-      </form>
+      <div className="bg-[var(--ivory)] border border-border rounded-2xl p-8 flex flex-col justify-center items-center text-center gap-6">
+        <div className="w-16 h-16 rounded-full bg-[#25D366] text-white flex items-center justify-center">
+          <WhatsAppIcon />
+        </div>
+        <div>
+          <p className="font-display text-3xl text-[var(--ink)]">Chat with our trade desk</p>
+          <p className="text-sm text-muted-foreground mt-2 max-w-xs">
+            Send a hi and we'll share the full catalogue, price list and color set details.
+          </p>
+        </div>
+        <a
+          href={waLink("Namaste Devrani, please share the full catalogue and price list.")}
+          target="_blank"
+          rel="noreferrer"
+          className="rounded-full bg-[#25D366] hover:bg-[#1ea952] text-white px-8 py-3 text-sm tracking-wide transition-colors flex items-center gap-2"
+        >
+          <WhatsAppIcon /> Open WhatsApp
+        </a>
+      </div>
     </section>
   );
 }
@@ -340,18 +410,19 @@ function Footer() {
       <div className="mx-auto max-w-7xl px-6 py-14 grid md:grid-cols-4 gap-10">
         <div className="md:col-span-2 space-y-4">
           <img src={logo.url} alt="Devrani Saree Pvt. Ltd." className="h-14 w-auto bg-[var(--ivory)] rounded-lg p-2 inline-block" />
-          <p className="text-sm max-w-sm leading-relaxed">Devrani Saree Pvt. Ltd. — साड़ियों का मायका. A boutique B2B saree house serving retailers across India.</p>
+          <p className="text-sm max-w-sm leading-relaxed">
+            Devrani Saree Pvt. Ltd. — साड़ियों का मायका. A boutique B2B saree house from Surat. Every design ships as a full color set.
+          </p>
         </div>
         <div className="space-y-2 text-sm">
           <p className="text-[var(--gold)] uppercase tracking-widest text-xs mb-3">Explore</p>
-          <a href="#collections" className="block hover:text-[var(--rose)]">Collections</a>
+          <a href="#catalogue" className="block hover:text-[var(--rose)]">Catalogue</a>
           <a href="#craft" className="block hover:text-[var(--rose)]">The Craft</a>
           <a href="#wholesale" className="block hover:text-[var(--rose)]">Wholesale</a>
         </div>
         <div className="space-y-2 text-sm">
           <p className="text-[var(--gold)] uppercase tracking-widest text-xs mb-3">Trade</p>
-          <p>+91 00000 00000</p>
-          <p>trade@devranisaree.com</p>
+          <p>WhatsApp {WHATSAPP_DISPLAY}</p>
           <p>Surat, Gujarat</p>
         </div>
       </div>
