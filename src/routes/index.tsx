@@ -31,60 +31,55 @@ function Index() {
 
 function Hero() {
   return (
-    <section id="top" className="relative overflow-hidden">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 pt-10 sm:pt-16 pb-16 sm:pb-24 grid md:grid-cols-12 gap-8 md:gap-10 items-center">
-        <div className="md:col-span-6 space-y-6 sm:space-y-8 animate-fade-in">
-          <span className="inline-flex items-center gap-2 text-[10px] sm:text-xs tracking-[0.3em] uppercase text-[var(--gold)]">
-            <span className="h-px w-8 bg-[var(--gold)]" /> Est. Wholesale House
-          </span>
-          <h1 className="font-display text-4xl sm:text-6xl md:text-7xl leading-[1.02] text-[var(--ink)]">
-            Full color sets,<br />
-            <em className="not-italic text-[var(--gold)]">every catalogue.</em>
-          </h1>
-          <p className="text-base sm:text-lg text-muted-foreground max-w-lg leading-relaxed">
-            Devrani is a boutique B2B saree house from Surat — every design ships as a{" "}
-            <em>complete color set</em>, packed and dispatched together.
-          </p>
-          <div className="flex flex-wrap gap-3">
-            <Link to="/catalogue" className="rounded-full bg-[var(--ink)] px-6 sm:px-7 py-3 text-sm tracking-wide text-[var(--ivory)] hover:bg-[var(--gold)] transition-colors hover-scale">
-              Browse all {products.length} designs
-            </Link>
-            <a
-              href={waLink("Namaste Devrani, please share the full price list.")}
-              target="_blank"
-              rel="noreferrer"
-              className="rounded-full border border-[var(--ink)] px-6 sm:px-7 py-3 text-sm tracking-wide hover:bg-[var(--ink)] hover:text-[var(--ivory)] transition-colors"
-            >
-              WhatsApp Price List
-            </a>
-          </div>
-          <dl className="grid grid-cols-3 gap-4 sm:gap-6 pt-6 sm:pt-8 border-t border-border max-w-md">
-            {[
-              [`${products.length}+`, "Live designs"],
-              ["Full", "Color sets"],
-              ["48hr", "Dispatch"],
-            ].map(([k, v]) => (
-              <div key={v}>
-                <dt className="font-display text-2xl sm:text-3xl text-[var(--gold)]">{k}</dt>
-                <dd className="text-[10px] sm:text-xs uppercase tracking-widest text-muted-foreground mt-1">{v}</dd>
-              </div>
-            ))}
-          </dl>
-        </div>
-        <div className="md:col-span-6 relative animate-fade-in">
-          <div className="absolute -inset-6 sm:-inset-8 bg-[var(--rose)]/25 rounded-[2rem] -z-10 rotate-2 animate-pulse" />
+    <section id="top" className="relative">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 pt-6 sm:pt-10 pb-10 sm:pb-16">
+        <div className="relative aspect-[4/5] sm:aspect-[16/10] overflow-hidden rounded-[1.25rem] shadow-2xl shadow-[var(--rose)]/30 animate-fade-in">
           <img
             src={heroSaree}
             alt="Model draped in a Devrani silk saree"
-            width={1400}
-            height={1600}
-            className="rounded-[1.5rem] w-full object-cover shadow-2xl shadow-[var(--rose)]/40 transition-transform duration-700 hover:scale-[1.02]"
+            className="w-full h-full object-cover"
           />
-          <div className="absolute -bottom-4 -left-4 sm:-bottom-6 sm:-left-6 bg-[var(--ivory)] border border-[var(--gold)]/40 rounded-2xl px-4 py-3 sm:px-5 sm:py-4 shadow-lg animate-fade-in">
-            <p className="font-display text-lg sm:text-xl text-[var(--ink)]">Full Set Dispatch</p>
-            <p className="text-[10px] sm:text-xs uppercase tracking-widest text-muted-foreground">All colors · One carton</p>
+          <div className="absolute inset-0 bg-gradient-to-t from-[var(--ink)]/75 via-[var(--ink)]/25 to-transparent" />
+          <div className="absolute inset-0 flex flex-col justify-end p-6 sm:p-12 md:p-16">
+            <p className="text-[var(--gold)] uppercase tracking-[0.3em] text-[10px] sm:text-xs font-bold mb-3 sm:mb-4">
+              Autumn Wholesale · Est. Boutique House
+            </p>
+            <h1 className="font-display italic text-white text-4xl sm:text-6xl md:text-7xl leading-[0.95] max-w-2xl">
+              The loom<br />of heritage.
+            </h1>
+            <p className="mt-4 sm:mt-6 text-white/85 max-w-md text-sm sm:text-base leading-relaxed">
+              A boutique B2B saree house from Surat — every design ships as a{" "}
+              <em className="text-[var(--rose)] not-italic font-medium">complete color set</em>,
+              packed and dispatched together.
+            </p>
+            <div className="flex flex-wrap gap-3 mt-6 sm:mt-8">
+              <Link to="/catalogue" className="rounded-full bg-[var(--rose)] text-[var(--ink)] px-6 py-3 text-[11px] sm:text-xs tracking-[0.2em] uppercase font-bold hover:bg-[var(--gold)] hover:text-white transition-colors hover-scale">
+                Explore {products.length} designs
+              </Link>
+              <a
+                href={waLink("Namaste Devrani, please share the full price list.")}
+                target="_blank"
+                rel="noreferrer"
+                className="rounded-full border border-white/70 text-white px-6 py-3 text-[11px] sm:text-xs tracking-[0.2em] uppercase font-bold hover:bg-white hover:text-[var(--ink)] transition-colors"
+              >
+                WhatsApp Price
+              </a>
+            </div>
           </div>
         </div>
+
+        <dl className="grid grid-cols-3 gap-4 sm:gap-6 pt-8 sm:pt-10 max-w-2xl mx-auto">
+          {[
+            [`${products.length}+`, "Live designs"],
+            ["Full", "Color sets"],
+            ["48hr", "Dispatch"],
+          ].map(([k, v]) => (
+            <div key={v} className="text-center">
+              <dt className="font-display italic text-3xl sm:text-4xl text-[var(--gold)]">{k}</dt>
+              <dd className="text-[10px] sm:text-xs uppercase tracking-[0.2em] text-muted-foreground mt-1">{v}</dd>
+            </div>
+          ))}
+        </dl>
       </div>
     </section>
   );
@@ -222,14 +217,30 @@ function Wholesale() {
   ];
   return (
     <section id="wholesale" className="bg-[var(--rose)]/25 py-16 sm:py-24">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6">
-        <div className="max-w-2xl mb-10 sm:mb-14 animate-fade-in">
-          <span className="text-xs uppercase tracking-[0.3em] text-[var(--gold)]">Wholesale Programme</span>
-          <h2 className="font-display text-3xl sm:text-5xl mt-3">Priced by the color set.</h2>
-          <p className="text-muted-foreground mt-4">
-            Every design is one indivisible color set. Order one, three, or ten — the full range ships together.
-          </p>
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 space-y-10 sm:space-y-14">
+        {/* Editorial dark CTA */}
+        <div className="relative bg-[var(--ink)] text-[var(--ivory)] rounded-2xl p-8 sm:p-14 text-center border border-[var(--gold)]/40 overflow-hidden animate-fade-in">
+          <div className="absolute -top-16 -right-16 w-48 h-48 rounded-full bg-[var(--gold)]/10" />
+          <div className="absolute -bottom-20 -left-20 w-56 h-56 rounded-full bg-[var(--rose)]/10" />
+          <div className="relative">
+            <p className="text-[var(--gold)] text-[10px] sm:text-xs uppercase tracking-[0.3em] font-bold mb-3">
+              Partner with Devrani
+            </p>
+            <h2 className="font-display italic text-3xl sm:text-5xl mb-4 text-[var(--gold)]">Priced by the color set.</h2>
+            <p className="text-[var(--ivory)]/70 text-sm sm:text-base max-w-xl mx-auto leading-relaxed mb-8">
+              Apply for wholesale access — browse our masterweaver catalogues, unlock per-set pricing, and get direct WhatsApp support.
+            </p>
+            <a
+              href={waLink("Namaste Devrani, I'd like to register as a retail partner.")}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-2 rounded-full bg-[var(--gold)] text-[var(--ink)] px-8 py-4 text-[11px] sm:text-xs uppercase tracking-[0.2em] font-bold hover:bg-[var(--rose)] transition-colors hover-scale"
+            >
+              Register Retail Account
+            </a>
+          </div>
         </div>
+
         <div className="grid md:grid-cols-3 gap-4 sm:gap-6">
           {tiers.map((t) => (
             <div key={t.name} className="bg-[var(--ivory)] rounded-2xl p-6 sm:p-8 border border-[var(--gold)]/30 hover:-translate-y-1 hover:shadow-xl transition-all">
