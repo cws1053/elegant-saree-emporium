@@ -1,17 +1,9 @@
 import { useState } from "react";
 
-type View = { label: string; style: React.CSSProperties };
-
-const views: View[] = [
-  { label: "Full", style: { transform: "scale(1)", transformOrigin: "center" } },
-  { label: "Pallu", style: { transform: "scale(1.9)", transformOrigin: "50% 15%" } },
-  { label: "Border", style: { transform: "scale(2.1)", transformOrigin: "50% 90%" } },
-  { label: "Weave", style: { transform: "scale(2.6)", transformOrigin: "35% 55%" } },
-];
-
-export function ProductGallery({ src, alt }: { src: string; alt: string }) {
+export function ProductGallery({ images, alt }: { images: string[]; alt: string }) {
   const [active, setActive] = useState(0);
   const [zoom, setZoom] = useState(false);
+  const src = images[active] ?? images[0];
 
   return (
     <div className="animate-fade-in">
@@ -20,56 +12,61 @@ export function ProductGallery({ src, alt }: { src: string; alt: string }) {
         <button
           type="button"
           onClick={() => setZoom(true)}
-          className="block w-full aspect-[4/5] rounded-[1.5rem] overflow-hidden shadow-2xl shadow-[var(--rose)]/40 bg-[var(--ivory)]"
+          className="block w-full aspect-[3/4] rounded-[1.5rem] overflow-hidden shadow-2xl shadow-[var(--rose)]/40 bg-[var(--ivory)]"
         >
           <img
             src={src}
-            alt={alt}
-            className="w-full h-full object-cover transition-transform duration-700 will-change-transform"
-            style={views[active].style}
+            alt={`${alt} — page ${active + 1}`}
+            className="w-full h-full object-contain transition-opacity duration-500"
           />
         </button>
         <p className="mt-3 text-center text-xs uppercase tracking-widest text-muted-foreground">
-          Tap image to zoom · {views[active].label} view
+          Page {active + 1} of {images.length} · Tap to zoom
         </p>
       </div>
 
-      <div className="grid grid-cols-4 gap-2 sm:gap-3 mt-4">
-        {views.map((v, i) => (
-          <button
-            key={v.label}
-            type="button"
-            onClick={() => setActive(i)}
-            aria-label={`${v.label} view`}
-            className={`aspect-square rounded-xl overflow-hidden border-2 transition-all bg-[var(--ivory)] ${
-              i === active
-                ? "border-[var(--gold)] shadow-md scale-[1.02]"
-                : "border-transparent opacity-80 hover:opacity-100"
-            }`}
-          >
-            <img
-              src={src}
-              alt={`${alt} — ${v.label}`}
-              className="w-full h-full object-cover"
-              style={v.style}
-              loading="lazy"
-            />
-          </button>
-        ))}
-      </div>
+      {images.length > 1 && (
+        <div className="grid grid-cols-4 sm:grid-cols-5 gap-2 sm:gap-3 mt-4">
+          {images.map((img, i) => (
+            <button
+              key={img}
+              type="button"
+              onClick={() => setActive(i)}
+              aria-label={`View page ${i + 1}`}
+              className={`aspect-[3/4] rounded-xl overflow-hidden border-2 transition-all bg-[var(--ivory)] ${
+                i === active
+                  ? "border-[var(--gold)] shadow-md scale-[1.02]"
+                  : "border-transparent opacity-75 hover:opacity-100"
+              }`}
+            >
+              <img
+                src={img}
+                alt={`${alt} — thumbnail ${i + 1}`}
+                className="w-full h-full object-cover"
+                loading="lazy"
+              />
+            </button>
+          ))}
+        </div>
+      )}
 
       {zoom && (
         <div
-          className="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm grid place-items-center p-4 animate-fade-in"
+          className="fixed inset-0 z-50 bg-black/90 backdrop-blur-sm grid place-items-center p-4 animate-fade-in"
           onClick={() => setZoom(false)}
         >
-          <img src={src} alt={alt} className="max-h-[92vh] max-w-full rounded-lg" />
+          <img src={src} alt={alt} className="max-h-[92vh] max-w-full rounded-lg object-contain" />
           <button
             className="absolute top-4 right-4 h-10 w-10 rounded-full bg-white/90 text-[var(--ink)] grid place-items-center"
             aria-label="Close"
           >
             ✕
           </button>
+          {images.length > 1 && (
+            <div className="absolute bottom-6 left-1/2 -translate-x-1/2 text-white/80 text-xs tracking-widest uppercase">
+              Page {active + 1} / {images.length}
+            </div>
+          )}
         </div>
       )}
     </div>

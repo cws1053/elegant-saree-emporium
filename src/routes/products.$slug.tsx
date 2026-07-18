@@ -6,6 +6,7 @@ import { TopBar, Nav, Footer, WhatsAppIcon, ProductCard } from "@/components/sit
 import { waLink } from "@/lib/wa";
 import { ProductGallery } from "@/components/product-gallery";
 import { CatalogueDownloadDialog } from "@/components/catalogue-download";
+import { productPages } from "@/data/product-pages";
 
 export const Route = createFileRoute("/products/$slug")({
   component: ProductPage,
