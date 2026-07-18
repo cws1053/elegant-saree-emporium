@@ -6,6 +6,7 @@ import { products } from "@/data/products";
 import { featuredProducts } from "@/lib/product-details";
 import { TopBar, Nav, Footer, ProductCard, WhatsAppIcon } from "@/components/site-chrome";
 import { WHATSAPP_DISPLAY, waLink } from "@/lib/wa";
+import { useI18n } from "@/i18n";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -30,6 +31,7 @@ function Index() {
 }
 
 function Hero() {
+  const { t } = useI18n();
   return (
     <section id="top" className="relative">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 pt-6 sm:pt-10 pb-10 sm:pb-16">
@@ -42,19 +44,19 @@ function Hero() {
           <div className="absolute inset-0 bg-gradient-to-t from-[var(--ink)]/75 via-[var(--ink)]/25 to-transparent" />
           <div className="absolute inset-0 flex flex-col justify-end p-6 sm:p-12 md:p-16">
             <p className="text-[var(--gold)] uppercase tracking-[0.3em] text-[10px] sm:text-xs font-bold mb-3 sm:mb-4">
-              Autumn Wholesale · Est. Boutique House
+              {t("hero.tag")}
             </p>
             <h1 className="font-display italic text-white text-4xl sm:text-6xl md:text-7xl leading-[0.95] max-w-2xl">
-              The loom<br />of heritage.
+              {t("hero.title1")}<br />{t("hero.title2")}
             </h1>
             <p className="mt-4 sm:mt-6 text-white/85 max-w-md text-sm sm:text-base leading-relaxed">
-              A boutique B2B saree house from Surat — every design ships as a{" "}
-              <em className="text-[var(--rose)] not-italic font-medium">complete color set</em>,
-              packed and dispatched together.
+              {t("hero.subtitle_pre")}{" "}
+              <em className="text-[var(--rose)] not-italic font-medium">{t("hero.subtitle_em")}</em>
+              {t("hero.subtitle_post")}
             </p>
             <div className="flex flex-wrap gap-3 mt-6 sm:mt-8">
               <Link to="/catalogue" className="rounded-full bg-[var(--rose)] text-[var(--ink)] px-6 py-3 text-[11px] sm:text-xs tracking-[0.2em] uppercase font-bold hover:bg-[var(--gold)] hover:text-white transition-colors hover-scale">
-                Explore {products.length} designs
+                {t("hero.cta_explore", { count: products.length })}
               </Link>
               <a
                 href={waLink("Namaste Devrani, please share the full price list.")}
@@ -62,7 +64,7 @@ function Hero() {
                 rel="noreferrer"
                 className="rounded-full border border-white/70 text-white px-6 py-3 text-[11px] sm:text-xs tracking-[0.2em] uppercase font-bold hover:bg-white hover:text-[var(--ink)] transition-colors"
               >
-                WhatsApp Price
+                {t("hero.cta_wa_price")}
               </a>
             </div>
           </div>
@@ -70,9 +72,9 @@ function Hero() {
 
         <dl className="grid grid-cols-3 gap-4 sm:gap-6 pt-8 sm:pt-10 max-w-2xl mx-auto">
           {[
-            [`${products.length}+`, "Live designs"],
-            ["Full", "Color sets"],
-            ["48hr", "Dispatch"],
+            [`${products.length}+`, t("hero.stat_live")],
+            ["Full", t("hero.stat_sets")],
+            ["48hr", t("hero.stat_dispatch")],
           ].map(([k, v]) => (
             <div key={v} className="text-center">
               <dt className="font-display italic text-3xl sm:text-4xl text-[var(--gold)]">{k}</dt>
@@ -86,13 +88,14 @@ function Hero() {
 }
 
 function ColorSetBanner() {
+  const { t } = useI18n();
   return (
     <div className="bg-[var(--gold)] text-white">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 py-3 sm:py-4 flex flex-wrap items-center justify-center gap-2 sm:gap-3 text-center text-xs sm:text-base tracking-wide">
         <span className="font-display text-lg sm:text-2xl animate-pulse">✦</span>
         <p>
-          <strong className="font-display text-base sm:text-xl mr-2">Please note —</strong>
-          Every design ships as a <em>full color set</em>. Single-piece orders are not accepted.
+          <strong className="font-display text-base sm:text-xl mr-2">{t("banner.please_note")}</strong>
+          {t("banner.body_pre")} <em>{t("banner.body_em")}</em> {t("banner.body_post")}
         </p>
       </div>
     </div>

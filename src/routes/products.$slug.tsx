@@ -2,11 +2,12 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useState } from "react";
 import { getProduct } from "@/lib/product-details";
 import { products } from "@/data/products";
-import { TopBar, Nav, Footer, WhatsAppIcon, ProductCard } from "@/components/site-chrome";
+import { TopBar, Nav, Footer, WhatsAppIcon } from "@/components/site-chrome";
 import { waLink } from "@/lib/wa";
 import { ProductGallery } from "@/components/product-gallery";
 import { CatalogueDownloadDialog } from "@/components/catalogue-download";
 import { productPages } from "@/data/product-pages";
+import { useI18n } from "@/i18n";
 
 export const Route = createFileRoute("/products/$slug")({
   component: ProductPage,
@@ -46,6 +47,7 @@ export const Route = createFileRoute("/products/$slug")({
 
 function ProductPage() {
   const { product } = Route.useLoaderData();
+  const { t } = useI18n();
   const [qty, setQty] = useState(1);
   const [showDownload, setShowDownload] = useState(false);
 
@@ -65,9 +67,9 @@ function ProductPage() {
       <Nav />
 
       <div className="mx-auto max-w-7xl px-4 sm:px-6 pt-5 text-[10px] sm:text-xs tracking-widest uppercase text-muted-foreground animate-fade-in">
-        <Link to="/" className="hover:text-[var(--gold)]">Home</Link>
+        <Link to="/" className="hover:text-[var(--gold)]">{t("product.home")}</Link>
         <span className="mx-2">/</span>
-        <Link to="/catalogue" className="hover:text-[var(--gold)]">Catalogue</Link>
+        <Link to="/catalogue" className="hover:text-[var(--gold)]">{t("product.catalogue")}</Link>
         <span className="mx-2">/</span>
         <span className="text-[var(--ink)]">{product.title}</span>
       </div>
@@ -75,20 +77,20 @@ function ProductPage() {
       {/* Header / Meta */}
       <section className="mx-auto max-w-7xl px-4 sm:px-6 pt-6 sm:pt-10">
         <p className="text-[10px] uppercase tracking-[0.3em] text-[var(--gold)] font-semibold">
-          SKU · {sku}
+          {t("product.sku")} · {sku}
         </p>
         <h1 className="font-display text-3xl sm:text-5xl md:text-6xl mt-2 leading-[1.05] max-w-3xl">
           {product.title}
         </h1>
         <div className="flex flex-wrap items-center gap-3 mt-4">
           <span className="px-3 py-1 bg-[var(--rose)]/20 border border-[var(--rose)]/50 text-[var(--ink)] text-[10px] font-bold tracking-widest uppercase">
-            B2B · Full Color Set
+            {t("product.b2b_badge")}
           </span>
           <span className="px-3 py-1 border border-[var(--gold)]/50 text-[var(--gold)] text-[10px] font-bold tracking-widest uppercase">
-            {product.colors} Shades
+            {t("product.shades", { n: product.colors })}
           </span>
           <span className="text-[11px] text-muted-foreground tracking-wide">
-            Price on WhatsApp enquiry
+            {t("product.price_on_wa")}
           </span>
         </div>
       </section>
@@ -198,11 +200,11 @@ function ProductPage() {
       <section className="mx-auto max-w-7xl px-4 sm:px-6 py-14 sm:py-20">
         <div className="flex items-end justify-between mb-6">
           <div>
-            <p className="text-[10px] uppercase tracking-[0.3em] text-[var(--gold)]">Curated for you</p>
-            <h2 className="font-display italic text-2xl sm:text-4xl mt-2">Suggested for your store</h2>
+            <p className="text-[10px] uppercase tracking-[0.3em] text-[var(--gold)]">{t("product.curated")}</p>
+            <h2 className="font-display italic text-2xl sm:text-4xl mt-2">{t("product.suggested")}</h2>
           </div>
           <Link to="/catalogue" className="text-[10px] sm:text-xs uppercase tracking-widest text-[var(--sage)] border-b border-[var(--sage)] pb-0.5 hover:text-[var(--gold)] hover:border-[var(--gold)] transition-colors">
-            See all
+            {t("product.see_all")}
           </Link>
         </div>
         <div className="flex gap-4 overflow-x-auto pb-4 snap-x snap-mandatory -mx-4 sm:mx-0 px-4 sm:px-0 sm:grid sm:grid-cols-3 lg:grid-cols-6">
@@ -232,7 +234,7 @@ function ProductPage() {
           className="flex-1 flex flex-col items-center justify-center gap-0.5 border-r border-[var(--sage)]/25"
         >
           <DownloadIcon />
-          <span className="text-[9px] uppercase font-bold tracking-widest">Catalogue</span>
+          <span className="text-[9px] uppercase font-bold tracking-widest">{t("product.btn_catalogue")}</span>
         </button>
         <a
           href={waLink(message)}
@@ -241,7 +243,7 @@ function ProductPage() {
           className="flex-[1.6] bg-[var(--ink)] text-[var(--ivory)] flex items-center justify-center gap-2 hover:bg-black transition-colors"
         >
           <span className="text-[var(--gold)]"><WhatsAppIcon size={18} /></span>
-          <span className="text-[11px] uppercase font-bold tracking-[0.18em]">WhatsApp Enquire</span>
+          <span className="text-[11px] uppercase font-bold tracking-[0.18em]">{t("product.sticky_wa")}</span>
         </a>
       </div>
 
