@@ -70,7 +70,17 @@ export function Nav() {
       {open && (
         <div className="md:hidden border-t border-border bg-background animate-fade-in">
           <div className="px-4 py-4 flex flex-col gap-2">
-            {links.map((l) => (
+          {links.map((l) =>
+            l.internal ? (
+              <Link
+                key={l.to}
+                to={l.to}
+                onClick={() => setOpen(false)}
+                className="py-2 text-sm tracking-wide border-b border-border/60"
+              >
+                {l.label}
+              </Link>
+            ) : (
               <a
                 key={l.to}
                 href={l.to}
@@ -79,12 +89,13 @@ export function Nav() {
               >
                 {l.label}
               </a>
-            ))}
+            ),
+          )}
             <a
               href={waLink("Namaste Devrani, please share the catalogue.")}
               target="_blank"
               rel="noreferrer"
-              className="mt-2 rounded-full bg-[#25D366] text-white text-sm py-3 text-center"
+              className="mt-2 rounded-full bg-[#25D366] text-[var(--ivory)] text-sm py-3 text-center"
             >
               {t("nav.whatsapp")} {WHATSAPP_DISPLAY}
             </a>
