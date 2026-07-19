@@ -114,9 +114,9 @@ function ProductPage() {
             {/* Spec Strip */}
             <div className="border-y border-[var(--ink)]/10 py-6 my-8 grid grid-cols-3 gap-6">
               {[
-                [t("product.fabric") ?? "Fabric", product.fabric.split(" ").slice(0, 2).join(" ")],
-                [t("product.weight") ?? "Weight", product.weight],
-                [t("product.colors") ?? "Colors", `${product.colors} shades`],
+                ["Fabric", product.fabric.split(" ").slice(0, 2).join(" ")],
+                ["Weight", product.weight],
+                ["Colors", `${product.colors} shades`],
               ].map(([k, v]) => (
                 <div key={k}>
                   <span className="block text-[9px] uppercase tracking-widest text-[var(--ink)]/40 mb-1 font-semibold">{k}</span>
