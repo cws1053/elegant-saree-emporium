@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 export const UNLOCK_KEY = "devrani:catalogue-unlocked";
 export const UNLOCK_EVENT = "devrani:catalogue-unlocked";
@@ -25,7 +25,7 @@ export function CatalogueDownloadDialog({ productTitle, productImage, onClose, m
   const [generatedOtp, setGeneratedOtp] = useState("");
   const [error, setError] = useState("");
   const [sending, setSending] = useState(false);
-  const dialogRef = useRef<HTMLDivElement>(null);
+  
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => e.key === "Escape" && onClose();
@@ -82,8 +82,10 @@ export function CatalogueDownloadDialog({ productTitle, productImage, onClose, m
       onClick={onClose}
     >
       <div
-        ref={dialogRef}
         onClick={(e) => e.stopPropagation()}
+        role="dialog"
+        aria-modal="true"
+        aria-label={`${productTitle} catalogue`}
         className="w-full max-w-md bg-[var(--ivory)] rounded-2xl shadow-2xl overflow-hidden"
       >
         <div className="px-6 pt-6 pb-4 border-b border-[var(--gold)]/25 flex items-start justify-between gap-4">
