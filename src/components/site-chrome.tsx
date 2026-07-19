@@ -29,7 +29,7 @@ export function Nav() {
     <header className="border-b border-border/70 bg-background/85 backdrop-blur sticky top-0 z-40">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between gap-3">
         <Link to="/" className="flex items-center gap-3 shrink-0">
-          <img src={logo.url} alt="Devrani Saree Pvt. Ltd." className="h-10 sm:h-12 w-auto" />
+          <img src={logo.url} alt="Devrani Saree Pvt. Ltd." className="h-14 sm:h-12 w-auto" />
         </Link>
         <nav className="hidden md:flex items-center gap-8 text-sm tracking-wide">
           {links.map((l) =>
