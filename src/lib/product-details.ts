@@ -33,17 +33,17 @@ const cares = ["Dry clean only. Store folded in muslin.", "Gentle hand wash in c
 export function getDetails(p: Product): ProductDetails {
   return {
     ...p,
-    fabric: pick(fabrics, p.slug),
-    colors: 6 + ((p.slug.length * 3) % 7), // 6–12 colors
-    blouse: "0.80m running blouse piece included",
-    length: "5.5m saree + 0.8m blouse",
+    fabric: "Fancy Fabric",
+    colors: 8,
+    blouse: "Blouse piece included",
+    length: "6 meter with blouse",
     occasion: pick(occasions, p.slug + "o"),
     weight: `${(650 + ((p.slug.length * 17) % 350))}g approx.`,
     care: pick(cares, p.slug + "c"),
     description:
-      `The ${p.title} catalogue from Devrani is a full color set of premium ${pick(fabrics, p.slug).toLowerCase()}, ` +
-      `curated for boutique retailers. Each set ships together — every colorway, packed and dispatched as one carton — ` +
-      `so your shelves land with the complete story of the design.`,
+      `The ${p.title} catalogue from Devrani is a full 8-color set of premium fancy fabric, ` +
+      `curated for boutique retailers. Each saree is 6 meters with blouse, and every colorway ships together — ` +
+      `packed and dispatched as one carton — so your shelves land with the complete story of the design.`,
   };
 }
 
