@@ -46,23 +46,23 @@ function Hero() {
             <p className="text-[var(--gold)] uppercase tracking-[0.3em] text-[10px] sm:text-xs font-bold mb-3 sm:mb-4">
               {t("hero.tag")}
             </p>
-            <h1 className="font-display italic text-white text-4xl sm:text-6xl md:text-7xl leading-[0.95] max-w-2xl">
+            <h1 className="font-display italic text-[var(--ivory)] text-4xl sm:text-6xl md:text-7xl leading-[0.95] max-w-2xl">
               {t("hero.title1")}<br />{t("hero.title2")}
             </h1>
-            <p className="mt-4 sm:mt-6 text-white/85 max-w-md text-sm sm:text-base leading-relaxed">
+            <p className="mt-4 sm:mt-6 text-[var(--ivory)]/85 max-w-md text-sm sm:text-base leading-relaxed">
               {t("hero.subtitle_pre")}{" "}
               <em className="text-[var(--rose)] not-italic font-medium">{t("hero.subtitle_em")}</em>
               {t("hero.subtitle_post")}
             </p>
             <div className="flex flex-wrap gap-3 mt-6 sm:mt-8">
-              <Link to="/catalogue" className="rounded-full bg-[var(--rose)] text-[var(--ink)] px-6 py-3 text-[11px] sm:text-xs tracking-[0.2em] uppercase font-bold hover:bg-[var(--gold)] hover:text-white transition-colors hover-scale">
+              <Link to="/catalogue" className="rounded-full bg-[var(--rose)] text-[var(--ink)] px-6 py-3 text-[11px] sm:text-xs tracking-[0.2em] uppercase font-bold hover:bg-[var(--gold)] hover:text-[var(--ivory)] transition-colors hover-scale">
                 {t("hero.cta_explore", { count: products.length })}
               </Link>
               <a
                 href={waLink("Namaste Devrani, please share the full price list.")}
                 target="_blank"
                 rel="noreferrer"
-                className="rounded-full border border-white/70 text-white px-6 py-3 text-[11px] sm:text-xs tracking-[0.2em] uppercase font-bold hover:bg-white hover:text-[var(--ink)] transition-colors"
+                className="rounded-full border border-[var(--ivory)]/70 text-[var(--ivory)] px-6 py-3 text-[11px] sm:text-xs tracking-[0.2em] uppercase font-bold hover:bg-[var(--ivory)] hover:text-[var(--ink)] transition-colors"
               >
                 {t("hero.cta_wa_price")}
               </a>
@@ -90,7 +90,7 @@ function Hero() {
 function ColorSetBanner() {
   const { t } = useI18n();
   return (
-    <div className="bg-[var(--gold)] text-white">
+    <div className="bg-[var(--gold)] text-[var(--ivory)]">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 py-3 sm:py-4 flex flex-wrap items-center justify-center gap-2 sm:gap-3 text-center text-xs sm:text-base tracking-wide">
         <span className="font-display text-lg sm:text-2xl animate-pulse">✦</span>
         <p>
@@ -119,19 +119,16 @@ function Marquee() {
 }
 
 function Story() {
+  const { t } = useI18n();
   return (
     <section className="mx-auto max-w-7xl px-4 sm:px-6 py-16 sm:py-24 grid md:grid-cols-2 gap-10 sm:gap-14 items-center">
       <img src={sareesStack} alt="A stack of Devrani sarees" width={1200} height={900} loading="lazy" className="rounded-[1.5rem] w-full object-cover animate-fade-in" />
       <div className="space-y-5 sm:space-y-6 animate-fade-in">
-        <span className="text-xs uppercase tracking-[0.3em] text-[var(--gold)]">Our House</span>
+        <span className="text-xs uppercase tracking-[0.3em] text-[var(--gold)]">{t("story.tag")}</span>
         <h2 className="font-display text-3xl sm:text-5xl leading-tight">
-          A daughter's home — <em className="not-italic text-[var(--gold)]">for every saree.</em>
+          {t("story.title_pre")} <em className="not-italic text-[var(--gold)]">{t("story.title_em")}</em>
         </h2>
-        <p className="text-muted-foreground leading-relaxed">
-          <em className="not-italic">Devrani</em> means the younger sister-in-law — a keeper of tradition
-          and a bringer of warmth. Our tagline, <em>साड़ियों का मायका</em> — a mother's home for sarees —
-          reflects the care with which every design is stitched, boxed and sent on its way to your store.
-        </p>
+        <p className="text-muted-foreground leading-relaxed">{t("story.body")}</p>
         <div className="gold-rule" />
       </div>
     </section>
@@ -139,24 +136,21 @@ function Story() {
 }
 
 function Featured() {
+  const { t } = useI18n();
   return (
     <section id="featured" className="bg-[var(--sage)]/12 py-16 sm:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <div className="flex flex-wrap items-end justify-between gap-4 sm:gap-6 mb-8 sm:mb-10">
           <div className="animate-fade-in">
-            <span className="text-xs uppercase tracking-[0.3em] text-[var(--gold)]">Featured</span>
-            <h2 className="font-display text-3xl sm:text-5xl mt-3 max-w-xl">
-              A glimpse of the season's bestsellers.
-            </h2>
-            <p className="text-sm text-muted-foreground mt-3 max-w-lg">
-              Tap any design for full details — fabric, color count, care & instant WhatsApp inquiry.
-            </p>
+            <span className="text-xs uppercase tracking-[0.3em] text-[var(--gold)]">{t("featured.tag")}</span>
+            <h2 className="font-display text-3xl sm:text-5xl mt-3 max-w-xl">{t("featured.title")}</h2>
+            <p className="text-sm text-muted-foreground mt-3 max-w-lg">{t("featured.body")}</p>
           </div>
           <Link
             to="/catalogue"
-            className="rounded-full border border-[var(--gold)] text-[var(--ink)] px-5 py-2.5 text-xs sm:text-sm tracking-wide hover:bg-[var(--gold)] hover:text-white transition-colors"
+            className="rounded-full border border-[var(--gold)] text-[var(--ink)] px-5 py-2.5 text-xs sm:text-sm tracking-wide hover:bg-[var(--gold)] hover:text-[var(--ivory)] transition-colors"
           >
-            View all {products.length} →
+            {t("featured.view_all", { count: products.length })}
           </Link>
         </div>
 
@@ -171,7 +165,7 @@ function Featured() {
             to="/catalogue"
             className="inline-flex items-center gap-2 rounded-full bg-[var(--ink)] text-[var(--ivory)] px-7 py-3 text-sm tracking-wide hover:bg-[var(--gold)] transition-colors hover-scale"
           >
-            Explore the full catalogue
+            {t("featured.explore_full")}
           </Link>
         </div>
       </div>
@@ -180,6 +174,7 @@ function Featured() {
 }
 
 function Craft() {
+  const { t } = useI18n();
   const rows = [
     { k: "01", t: "Sourced with intent", d: "Direct partnerships with weaver clusters in Banaras, Kanchipuram, Chanderi and Surat." },
     { k: "02", t: "Full color set model", d: "Every design ships as the complete color range — no single-piece breakage." },
@@ -193,8 +188,8 @@ function Craft() {
       </div>
       <div className="md:col-span-7 space-y-8 sm:space-y-10">
         <div className="animate-fade-in">
-          <span className="text-xs uppercase tracking-[0.3em] text-[var(--gold)]">The Craft</span>
-          <h2 className="font-display text-3xl sm:text-5xl mt-3 leading-tight">Slow-made weaves, retail-ready operations.</h2>
+          <span className="text-xs uppercase tracking-[0.3em] text-[var(--gold)]">{t("craft.tag")}</span>
+          <h2 className="font-display text-3xl sm:text-5xl mt-3 leading-tight">{t("craft.title")}</h2>
         </div>
         <ul className="divide-y divide-border">
           {rows.map((r) => (
@@ -213,6 +208,7 @@ function Craft() {
 }
 
 function Wholesale() {
+  const { t } = useI18n();
   const tiers = [
     { name: "Boutique", min: "1 set", note: "One full color set per design — try a range." },
     { name: "Retail Partner", min: "3 sets", note: "Mix designs across sets, priority stock and previews." },
@@ -221,17 +217,16 @@ function Wholesale() {
   return (
     <section id="wholesale" className="bg-[var(--rose)]/25 py-16 sm:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 space-y-10 sm:space-y-14">
-        {/* Editorial dark CTA */}
         <div className="relative bg-[var(--ink)] text-[var(--ivory)] rounded-2xl p-8 sm:p-14 text-center border border-[var(--gold)]/40 overflow-hidden animate-fade-in">
           <div className="absolute -top-16 -right-16 w-48 h-48 rounded-full bg-[var(--gold)]/10" />
           <div className="absolute -bottom-20 -left-20 w-56 h-56 rounded-full bg-[var(--rose)]/10" />
           <div className="relative">
             <p className="text-[var(--gold)] text-[10px] sm:text-xs uppercase tracking-[0.3em] font-bold mb-3">
-              Partner with Devrani
+              {t("wholesale.tag")}
             </p>
-            <h2 className="font-display italic text-3xl sm:text-5xl mb-4 text-[var(--gold)]">Priced by the color set.</h2>
+            <h2 className="font-display italic text-3xl sm:text-5xl mb-4 text-[var(--gold)]">{t("wholesale.title")}</h2>
             <p className="text-[var(--ivory)]/70 text-sm sm:text-base max-w-xl mx-auto leading-relaxed mb-8">
-              Apply for wholesale access — browse our masterweaver catalogues, unlock per-set pricing, and get direct WhatsApp support.
+              {t("wholesale.body")}
             </p>
             <a
               href={waLink("Namaste Devrani, I'd like to register as a retail partner.")}
@@ -239,20 +234,20 @@ function Wholesale() {
               rel="noreferrer"
               className="inline-flex items-center gap-2 rounded-full bg-[var(--gold)] text-[var(--ink)] px-8 py-4 text-[11px] sm:text-xs uppercase tracking-[0.2em] font-bold hover:bg-[var(--rose)] transition-colors hover-scale"
             >
-              Register Retail Account
+              {t("wholesale.cta")}
             </a>
           </div>
         </div>
 
         <div className="grid md:grid-cols-3 gap-4 sm:gap-6">
-          {tiers.map((t) => (
-            <div key={t.name} className="bg-[var(--ivory)] rounded-2xl p-6 sm:p-8 border border-[var(--gold)]/30 hover:-translate-y-1 hover:shadow-xl transition-all">
-              <p className="text-xs uppercase tracking-[0.25em] text-[var(--gold)]">Tier</p>
-              <h3 className="font-display text-2xl sm:text-3xl mt-2">{t.name}</h3>
-              <p className="mt-4 text-sm text-muted-foreground">Minimum order</p>
-              <p className="font-display text-3xl sm:text-4xl text-[var(--ink)]">{t.min}</p>
+          {tiers.map((tier) => (
+            <div key={tier.name} className="bg-[var(--ivory)] rounded-2xl p-6 sm:p-8 border border-[var(--gold)]/30 hover:-translate-y-1 hover:shadow-xl transition-all">
+              <p className="text-xs uppercase tracking-[0.25em] text-[var(--gold)]">{t("wholesale.tier")}</p>
+              <h3 className="font-display text-2xl sm:text-3xl mt-2">{tier.name}</h3>
+              <p className="mt-4 text-sm text-muted-foreground">{t("wholesale.min")}</p>
+              <p className="font-display text-3xl sm:text-4xl text-[var(--ink)]">{tier.min}</p>
               <div className="gold-rule my-5 sm:my-6" />
-              <p className="text-sm text-muted-foreground">{t.note}</p>
+              <p className="text-sm text-muted-foreground">{tier.note}</p>
             </div>
           ))}
         </div>
@@ -262,36 +257,33 @@ function Wholesale() {
 }
 
 function Enquire() {
+  const { t } = useI18n();
   return (
     <section id="enquire" className="mx-auto max-w-6xl px-4 sm:px-6 py-16 sm:py-24 grid md:grid-cols-2 gap-10 sm:gap-14">
       <div className="space-y-5 sm:space-y-6 animate-fade-in">
-        <span className="text-xs uppercase tracking-[0.3em] text-[var(--gold)]">Get in Touch</span>
-        <h2 className="font-display text-3xl sm:text-5xl leading-tight">One tap on WhatsApp.</h2>
-        <p className="text-muted-foreground max-w-md">
-          Our trade desk replies in minutes with the latest lookbook, per-set price and dispatch timeline.
-        </p>
+        <span className="text-xs uppercase tracking-[0.3em] text-[var(--gold)]">{t("enquire.tag")}</span>
+        <h2 className="font-display text-3xl sm:text-5xl leading-tight">{t("enquire.title")}</h2>
+        <p className="text-muted-foreground max-w-md">{t("enquire.body")}</p>
         <div className="space-y-3 pt-4 text-sm">
-          <p><span className="text-[var(--gold)] uppercase tracking-widest text-xs">WhatsApp</span><br />{WHATSAPP_DISPLAY}</p>
-          <p><span className="text-[var(--gold)] uppercase tracking-widest text-xs">Showroom</span><br />Surat, Gujarat · India</p>
+          <p><span className="text-[var(--gold)] uppercase tracking-widest text-xs">{t("enquire.wa")}</span><br />{WHATSAPP_DISPLAY}</p>
+          <p><span className="text-[var(--gold)] uppercase tracking-widest text-xs">{t("enquire.showroom")}</span><br />Surat, Gujarat · India</p>
         </div>
       </div>
       <div className="bg-[var(--ivory)] border border-border rounded-2xl p-6 sm:p-8 flex flex-col justify-center items-center text-center gap-5 sm:gap-6 hover:shadow-xl transition-shadow">
-        <div className="w-16 h-16 rounded-full bg-[#25D366] text-white flex items-center justify-center animate-pulse">
+        <div className="w-16 h-16 rounded-full bg-[#25D366] text-[var(--ivory)] flex items-center justify-center animate-pulse">
           <WhatsAppIcon size={22} />
         </div>
         <div>
-          <p className="font-display text-2xl sm:text-3xl text-[var(--ink)]">Chat with our trade desk</p>
-          <p className="text-sm text-muted-foreground mt-2 max-w-xs">
-            Send a hi and we'll share the full catalogue, price list and color set details.
-          </p>
+          <p className="font-display text-2xl sm:text-3xl text-[var(--ink)]">{t("enquire.chat_title")}</p>
+          <p className="text-sm text-muted-foreground mt-2 max-w-xs">{t("enquire.chat_body")}</p>
         </div>
         <a
           href={waLink("Namaste Devrani, please share the full catalogue and price list.")}
           target="_blank"
           rel="noreferrer"
-          className="rounded-full bg-[#25D366] hover:bg-[#1ea952] text-white px-6 sm:px-8 py-3 text-sm tracking-wide transition-colors flex items-center gap-2 hover-scale"
+          className="rounded-full bg-[#25D366] hover:bg-[#1ea952] text-[var(--ivory)] px-6 sm:px-8 py-3 text-sm tracking-wide transition-colors flex items-center gap-2 hover-scale"
         >
-          <WhatsAppIcon /> Open WhatsApp
+          <WhatsAppIcon /> {t("enquire.open_wa")}
         </a>
       </div>
     </section>

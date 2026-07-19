@@ -121,12 +121,14 @@ export function ProductGallery({
         >
           <img src={src} alt={alt} className="max-h-[92vh] max-w-full rounded-lg object-contain" />
           <button
-            className="absolute top-4 right-4 h-10 w-10 rounded-full bg-white/90 text-[var(--ink)] grid place-items-center"
+            type="button"
+            onClick={(e) => { e.stopPropagation(); setZoom(false); }}
+            className="absolute top-4 right-4 h-10 w-10 rounded-full bg-[var(--ivory)]/90 text-[var(--ink)] grid place-items-center"
             aria-label="Close"
           >
             ✕
           </button>
-          <div className="absolute bottom-6 left-1/2 -translate-x-1/2 text-white/80 text-xs tracking-widest uppercase">
+          <div className="absolute bottom-6 left-1/2 -translate-x-1/2 text-[var(--ivory)]/80 text-xs tracking-widest uppercase">
             Page {safeActive + 1} / {images.length}
           </div>
         </div>
