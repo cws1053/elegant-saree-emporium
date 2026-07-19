@@ -121,10 +121,24 @@ export function Footer() {
           <a href="/#craft" className="block hover:text-[var(--rose)]">{t("nav.craft")}</a>
           <a href="/#wholesale" className="block hover:text-[var(--rose)]">{t("nav.wholesale")}</a>
         </div>
-        <div className="space-y-2 text-sm">
+        <div className="space-y-3 text-sm">
           <p className="text-[var(--gold)] uppercase tracking-widest text-xs mb-3">{t("footer.trade")}</p>
           <p>{t("nav.whatsapp")} {WHATSAPP_DISPLAY}</p>
-          <p>Surat, Gujarat</p>
+          <div>
+            <p className="text-[var(--gold)]/90 uppercase tracking-widest text-[10px] mb-1">Head Office</p>
+            <p className="leading-relaxed">
+              J-1548-49, Millenium Textile Market-1,<br />
+              Ring Road, Surat, Gujarat — 395002
+            </p>
+          </div>
+          <div>
+            <p className="text-[var(--gold)]/90 uppercase tracking-widest text-[10px] mb-1">Corporate Office</p>
+            <p className="leading-relaxed">
+              Block No. 7197–7220, Passenger Lift 9B,<br />
+              Millenium Textile Market-4, Bhatena,<br />
+              Udhna, Surat, Gujarat — 394210
+            </p>
+          </div>
         </div>
       </div>
       <div className="border-t border-white/10">
