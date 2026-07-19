@@ -86,19 +86,25 @@ function ProductPage() {
       </div>
 
       {/* Header / Meta */}
-      <section className="mx-auto max-w-7xl px-4 sm:px-6 pt-6 sm:pt-10">
-        <p className="text-[10px] uppercase tracking-[0.3em] text-[var(--gold)] font-semibold">
-          {t("product.sku")} · {sku}
-        </p>
-        <h1 className="font-display text-3xl sm:text-5xl md:text-6xl mt-2 leading-[1.05] max-w-3xl">
+      <section className="mx-auto max-w-7xl px-4 sm:px-6 pt-6 sm:pt-10 animate-fade-in">
+        <div className="flex items-center gap-3 text-[var(--gold)]/70 mb-4">
+          <span className="h-px w-8 bg-[var(--gold)]" />
+          <span className="text-[10px] uppercase tracking-[0.35em] font-bold text-[var(--gold)]">
+            {t("product.sku")} · {sku}
+          </span>
+        </div>
+        <h1 className="font-display italic text-3xl sm:text-5xl md:text-6xl leading-[1.05] max-w-3xl">
           {product.title}
         </h1>
         <div className="flex flex-wrap items-center gap-3 mt-4">
-          <span className="px-3 py-1 bg-[var(--rose)]/20 border border-[var(--rose)]/50 text-[var(--ink)] text-[10px] font-bold tracking-widest uppercase">
+          <span className="px-3 py-1 bg-[var(--rose)]/20 border border-[var(--rose)]/50 text-[var(--ink)] text-[10px] font-bold tracking-widest uppercase rounded-full">
             {t("product.b2b_badge")}
           </span>
-          <span className="px-3 py-1 border border-[var(--gold)]/50 text-[var(--gold)] text-[10px] font-bold tracking-widest uppercase">
+          <span className="px-3 py-1 border border-[var(--gold)]/50 text-[var(--gold)] text-[10px] font-bold tracking-widest uppercase rounded-full">
             {t("product.shades", { n: product.colors })}
+          </span>
+          <span className="px-3 py-1 border border-[var(--sage)]/50 text-[var(--sage)] text-[10px] font-bold tracking-widest uppercase rounded-full">
+            Handloom · Fancy Silk
           </span>
           <span className="text-[11px] text-muted-foreground tracking-wide">
             {t("product.price_on_wa")}
