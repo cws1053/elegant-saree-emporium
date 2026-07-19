@@ -33,55 +33,86 @@ function Index() {
 function Hero() {
   const { t } = useI18n();
   return (
-    <section id="top" className="relative">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 pt-6 sm:pt-10 pb-10 sm:pb-16">
-        <div className="relative aspect-[4/5] sm:aspect-[16/10] overflow-hidden rounded-[1.25rem] shadow-2xl shadow-[var(--rose)]/30 animate-fade-in">
-          <img
-            src={heroSaree}
-            alt="Model draped in a Devrani silk saree"
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-[var(--ink)]/75 via-[var(--ink)]/25 to-transparent" />
-          <div className="absolute inset-0 flex flex-col justify-end p-6 sm:p-12 md:p-16">
-            <p className="text-[var(--gold)] uppercase tracking-[0.3em] text-[10px] sm:text-xs font-bold mb-3 sm:mb-4">
+    <section id="top" className="relative bg-[var(--ivory)]">
+      {/* Decorative filigree top rule */}
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 pt-6 flex items-center gap-4 text-[var(--gold)]/70">
+        <span className="h-px flex-1 bg-gradient-to-r from-transparent via-[var(--gold)]/40 to-[var(--gold)]/40" />
+        <span className="font-display italic text-xs sm:text-sm tracking-[0.4em] uppercase">Est. Devrani · Surat</span>
+        <span className="h-px flex-1 bg-gradient-to-l from-transparent via-[var(--gold)]/40 to-[var(--gold)]/40" />
+      </div>
+
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 pt-6 sm:pt-8 pb-10 sm:pb-16 grid md:grid-cols-12 gap-6 sm:gap-8 items-stretch">
+        {/* Left — editorial typography panel */}
+        <div className="md:col-span-5 order-2 md:order-1 flex flex-col justify-between bg-[var(--navy,#143D7A)] text-[var(--ivory)] rounded-[1.25rem] p-7 sm:p-10 relative overflow-hidden animate-fade-in">
+          <div className="absolute -top-16 -right-16 w-56 h-56 rounded-full bg-[var(--gold)]/15 blur-2xl" />
+          <div className="absolute -bottom-24 -left-16 w-64 h-64 rounded-full bg-[var(--rose)]/20 blur-3xl" />
+          <div className="relative">
+            <p className="text-[var(--gold)] uppercase tracking-[0.35em] text-[10px] sm:text-xs font-bold mb-4">
               {t("hero.tag")}
             </p>
-            <h1 className="font-display italic text-[var(--ivory)] text-4xl sm:text-6xl md:text-7xl leading-[0.95] max-w-2xl">
-              {t("hero.title1")}<br />{t("hero.title2")}
+            <h1 className="font-display italic text-[var(--ivory)] text-4xl sm:text-5xl lg:text-6xl leading-[0.95]">
+              {t("hero.title1")}<br />
+              <span className="text-[var(--gold)]">{t("hero.title2")}</span>
             </h1>
-            <p className="mt-4 sm:mt-6 text-[var(--ivory)]/85 max-w-md text-sm sm:text-base leading-relaxed">
+            <div className="my-6 h-px w-16 bg-[var(--gold)]" />
+            <p className="text-[var(--ivory)]/85 max-w-md text-sm sm:text-[15px] leading-relaxed">
               {t("hero.subtitle_pre")}{" "}
               <em className="text-[var(--rose)] not-italic font-medium">{t("hero.subtitle_em")}</em>
               {t("hero.subtitle_post")}
             </p>
-            <div className="flex flex-wrap gap-3 mt-6 sm:mt-8">
-              <Link to="/catalogue" className="rounded-full bg-[var(--rose)] text-[var(--ink)] px-6 py-3 text-[11px] sm:text-xs tracking-[0.2em] uppercase font-bold hover:bg-[var(--gold)] hover:text-[var(--ivory)] transition-colors hover-scale">
+            <div className="flex flex-wrap gap-3 mt-7">
+              <Link to="/catalogue" className="rounded-full bg-[var(--gold)] text-[var(--ink)] px-6 py-3 text-[11px] sm:text-xs tracking-[0.2em] uppercase font-bold hover:bg-[var(--ivory)] transition-colors hover-scale">
                 {t("hero.cta_explore", { count: products.length })}
               </Link>
               <a
                 href={waLink("Namaste Devrani, please share the full price list.")}
                 target="_blank"
                 rel="noreferrer"
-                className="rounded-full border border-[var(--ivory)]/70 text-[var(--ivory)] px-6 py-3 text-[11px] sm:text-xs tracking-[0.2em] uppercase font-bold hover:bg-[var(--ivory)] hover:text-[var(--ink)] transition-colors"
+                className="rounded-full border border-[var(--ivory)]/60 text-[var(--ivory)] px-6 py-3 text-[11px] sm:text-xs tracking-[0.2em] uppercase font-bold hover:bg-[var(--ivory)] hover:text-[var(--ink)] transition-colors"
               >
                 {t("hero.cta_wa_price")}
               </a>
             </div>
           </div>
+
+          <dl className="relative grid grid-cols-3 gap-4 pt-8 mt-8 border-t border-[var(--ivory)]/15">
+            {[
+              [`${products.length}+`, t("hero.stat_live")],
+              ["Full", t("hero.stat_sets")],
+              ["48hr", t("hero.stat_dispatch")],
+            ].map(([k, v]) => (
+              <div key={v}>
+                <dt className="font-display italic text-2xl sm:text-3xl text-[var(--gold)]">{k}</dt>
+                <dd className="text-[9px] sm:text-[10px] uppercase tracking-[0.2em] text-[var(--ivory)]/60 mt-1">{v}</dd>
+              </div>
+            ))}
+          </dl>
         </div>
 
-        <dl className="grid grid-cols-3 gap-4 sm:gap-6 pt-8 sm:pt-10 max-w-2xl mx-auto">
-          {[
-            [`${products.length}+`, t("hero.stat_live")],
-            ["Full", t("hero.stat_sets")],
-            ["48hr", t("hero.stat_dispatch")],
-          ].map(([k, v]) => (
-            <div key={v} className="text-center">
-              <dt className="font-display italic text-3xl sm:text-4xl text-[var(--gold)]">{k}</dt>
-              <dd className="text-[10px] sm:text-xs uppercase tracking-[0.2em] text-muted-foreground mt-1">{v}</dd>
-            </div>
-          ))}
-        </dl>
+        {/* Right — model portrait */}
+        <div className="md:col-span-7 order-1 md:order-2 relative aspect-[4/5] sm:aspect-[5/6] md:aspect-auto md:min-h-[560px] overflow-hidden rounded-[1.25rem] shadow-2xl shadow-[var(--navy,#143D7A)]/25 animate-fade-in">
+          <img
+            src={heroSaree}
+            alt="Model draped in a Devrani navy Banarasi saree with gold zari"
+            className="w-full h-full object-cover"
+          />
+          {/* subtle vignette */}
+          <div className="absolute inset-0 bg-gradient-to-t from-[var(--ink)]/40 via-transparent to-transparent" />
+          {/* corner tag */}
+          <div className="absolute top-4 left-4 sm:top-6 sm:left-6 bg-[var(--ivory)]/90 backdrop-blur px-3 py-1.5 rounded-full text-[9px] sm:text-[10px] uppercase tracking-[0.25em] font-bold text-[var(--ink)] flex items-center gap-2">
+            <span className="w-1.5 h-1.5 rounded-full bg-[var(--rose)] animate-pulse" />
+            New Season · SS26
+          </div>
+          {/* editorial caption bottom */}
+          <div className="absolute bottom-0 inset-x-0 p-4 sm:p-6 flex items-end justify-between gap-3">
+            <p className="font-display italic text-[var(--ivory)] text-base sm:text-lg drop-shadow-md">
+              “Woven for the woman who chooses her own story.”
+            </p>
+            <span className="text-[9px] sm:text-[10px] uppercase tracking-[0.3em] text-[var(--ivory)]/80 whitespace-nowrap">
+              Vol. 01
+            </span>
+          </div>
+        </div>
       </div>
     </section>
   );
