@@ -36,6 +36,8 @@
   --color-ivory: var(--ivory);
   --color-gold: var(--gold);
   --color-ink: var(--ink);
+  --color-navy: var(--navy);
+
 
   --font-display: "Cormorant Garamond", "Cormorant", serif;
   --font-body: "Karla", "Inter", sans-serif;
