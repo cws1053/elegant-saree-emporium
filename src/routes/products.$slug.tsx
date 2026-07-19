@@ -1,4 +1,4 @@
-import { createFileRoute, Link, notFound } from "@tanstack/react-router";
+import { createFileRoute, Link, notFound, useRouter } from "@tanstack/react-router";
 import { useState } from "react";
 import { getProduct } from "@/lib/product-details";
 import { products } from "@/data/products";
@@ -23,10 +23,8 @@ export const Route = createFileRoute("/products/$slug")({
           { name: "description", content: `${loaderData.product.title} — ${loaderData.product.fabric}. Full color set of ${loaderData.product.colors} shades, dispatched together.` },
           { property: "og:title", content: `${loaderData.product.title} — Devrani` },
           { property: "og:description", content: loaderData.product.description },
-          { property: "og:image", content: loaderData.product.image },
-          { name: "twitter:image", content: loaderData.product.image },
         ]
-      : [],
+      : [{ title: "Design — Devrani Saree" }, { name: "robots", content: "noindex" }],
   }),
   notFoundComponent: () => (
     <div className="min-h-screen grid place-items-center px-6 text-center">
@@ -38,12 +36,25 @@ export const Route = createFileRoute("/products/$slug")({
       </div>
     </div>
   ),
-  errorComponent: ({ reset }) => (
-    <div className="min-h-screen grid place-items-center px-6 text-center">
-      <button onClick={reset} className="rounded-full bg-[var(--ink)] text-[var(--ivory)] px-6 py-3 text-sm">Retry</button>
-    </div>
-  ),
+  errorComponent: ErrorRetry,
 });
+
+function ErrorRetry({ reset }: { error: Error; reset: () => void }) {
+  const router = useRouter();
+  return (
+    <div className="min-h-screen grid place-items-center px-6 text-center">
+      <button
+        onClick={() => {
+          router.invalidate();
+          reset();
+        }}
+        className="rounded-full bg-[var(--ink)] text-[var(--ivory)] px-6 py-3 text-sm"
+      >
+        Retry
+      </button>
+    </div>
+  );
+}
 
 function ProductPage() {
   const { product } = Route.useLoaderData();

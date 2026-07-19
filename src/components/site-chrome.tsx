@@ -19,8 +19,8 @@ export function TopBar() {
 export function Nav() {
   const [open, setOpen] = useState(false);
   const { t } = useI18n();
-  const links = [
-    { to: "/catalogue", label: t("nav.catalogue") },
+  const links: { to: string; label: string; internal?: boolean }[] = [
+    { to: "/catalogue", label: t("nav.catalogue"), internal: true },
     { to: "/#craft", label: t("nav.craft") },
     { to: "/#wholesale", label: t("nav.wholesale") },
     { to: "/#enquire", label: t("nav.contact") },
@@ -32,11 +32,17 @@ export function Nav() {
           <img src={logo.url} alt="Devrani Saree Pvt. Ltd." className="h-10 sm:h-12 w-auto" />
         </Link>
         <nav className="hidden md:flex items-center gap-8 text-sm tracking-wide">
-          {links.map((l) => (
-            <a key={l.to} href={l.to} className="hover:text-[var(--gold)] transition-colors">
-              {l.label}
-            </a>
-          ))}
+          {links.map((l) =>
+            l.internal ? (
+              <Link key={l.to} to={l.to} className="hover:text-[var(--gold)] transition-colors">
+                {l.label}
+              </Link>
+            ) : (
+              <a key={l.to} href={l.to} className="hover:text-[var(--gold)] transition-colors">
+                {l.label}
+              </a>
+            ),
+          )}
         </nav>
         <div className="flex items-center gap-2">
           <LanguageSwitcher />
@@ -44,7 +50,7 @@ export function Nav() {
             href={waLink("Namaste, I'd like to receive the Devrani catalogue.")}
             target="_blank"
             rel="noreferrer"
-            className="hidden sm:inline-flex items-center gap-2 rounded-full border border-[var(--gold)] px-4 py-2 text-xs sm:text-sm tracking-wide hover:bg-[var(--gold)] hover:text-white transition-colors"
+            className="hidden sm:inline-flex items-center gap-2 rounded-full border border-[var(--gold)] px-4 py-2 text-xs sm:text-sm tracking-wide hover:bg-[var(--gold)] hover:text-[var(--ivory)] transition-colors"
           >
             {t("nav.whatsapp")}
           </a>
@@ -64,7 +70,17 @@ export function Nav() {
       {open && (
         <div className="md:hidden border-t border-border bg-background animate-fade-in">
           <div className="px-4 py-4 flex flex-col gap-2">
-            {links.map((l) => (
+          {links.map((l) =>
+            l.internal ? (
+              <Link
+                key={l.to}
+                to={l.to}
+                onClick={() => setOpen(false)}
+                className="py-2 text-sm tracking-wide border-b border-border/60"
+              >
+                {l.label}
+              </Link>
+            ) : (
               <a
                 key={l.to}
                 href={l.to}
@@ -73,12 +89,13 @@ export function Nav() {
               >
                 {l.label}
               </a>
-            ))}
+            ),
+          )}
             <a
               href={waLink("Namaste Devrani, please share the catalogue.")}
               target="_blank"
               rel="noreferrer"
-              className="mt-2 rounded-full bg-[#25D366] text-white text-sm py-3 text-center"
+              className="mt-2 rounded-full bg-[#25D366] text-[var(--ivory)] text-sm py-3 text-center"
             >
               {t("nav.whatsapp")} {WHATSAPP_DISPLAY}
             </a>
