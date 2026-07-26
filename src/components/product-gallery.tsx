@@ -22,13 +22,21 @@ export function ProductGallery({
   useEffect(() => {
     setUnlocked(isCatalogueUnlocked());
     const onUnlock = () => setUnlocked(true);
+    const onStorage = (e: StorageEvent) => {
+      if (e.key === UNLOCK_KEY && e.newValue === "1") setUnlocked(true);
+    };
     window.addEventListener(UNLOCK_EVENT, onUnlock);
-    window.addEventListener("storage", onUnlock);
+    window.addEventListener("storage", onStorage);
     return () => {
       window.removeEventListener(UNLOCK_EVENT, onUnlock);
-      window.removeEventListener("storage", onUnlock);
+      window.removeEventListener("storage", onStorage);
     };
   }, []);
+
+  // Reset carousel when switching to a different product
+  useEffect(() => {
+    setActive(0);
+  }, [productTitle]);
 
   const visible = unlocked ? images : images.slice(0, PREVIEW_COUNT);
   const lockedCount = Math.max(0, images.length - visible.length);
