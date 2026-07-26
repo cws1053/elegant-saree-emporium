@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { CatalogueDownloadDialog, isCatalogueUnlocked, UNLOCK_EVENT } from "./catalogue-download";
+import { CatalogueDownloadDialog, isCatalogueUnlocked, UNLOCK_EVENT, UNLOCK_KEY } from "./catalogue-download";
 
 const PREVIEW_COUNT = 3;
 
