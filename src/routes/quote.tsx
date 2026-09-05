@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, useSearch } from "@tanstack/react-router";
 import { TopBar, Nav, Footer } from "@/components/site-chrome";
 import { QuoteForm } from "@/components/quote-form";
 import { useI18n } from "@/i18n";
