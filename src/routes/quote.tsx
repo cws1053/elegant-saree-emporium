@@ -26,7 +26,8 @@ export const Route = createFileRoute("/quote")({
 
 function QuotePage() {
   const { t } = useI18n();
-  const preset = (Route.useSearch() as { design?: string }).design;
+  const search = useSearch({ strict: false }) as { design?: string };
+  const preset = search.design;
 
   return (
     <div className="min-h-screen bg-background text-foreground">
