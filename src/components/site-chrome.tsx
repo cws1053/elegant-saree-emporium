@@ -125,6 +125,7 @@ export function Footer() {
         <div className="space-y-2 text-sm">
           <p className="text-[var(--gold)] uppercase tracking-widest text-xs mb-3">{t("footer.explore")}</p>
           <Link to="/catalogue" className="block hover:text-[var(--rose)]">{t("nav.catalogue")}</Link>
+          <Link to="/quote" className="block hover:text-[var(--rose)]">{t("nav.quote")}</Link>
           <a href="/#craft" className="block hover:text-[var(--rose)]">{t("nav.craft")}</a>
           <a href="/#wholesale" className="block hover:text-[var(--rose)]">{t("nav.wholesale")}</a>
         </div>
