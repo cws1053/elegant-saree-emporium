@@ -21,6 +21,7 @@ export function Nav() {
   const { t } = useI18n();
   const links: { to: string; label: string; internal?: boolean }[] = [
     { to: "/catalogue", label: t("nav.catalogue"), internal: true },
+    { to: "/quote", label: t("nav.quote"), internal: true },
     { to: "/#craft", label: t("nav.craft") },
     { to: "/#wholesale", label: t("nav.wholesale") },
     { to: "/#enquire", label: t("nav.contact") },
