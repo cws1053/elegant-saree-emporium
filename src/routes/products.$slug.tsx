@@ -153,7 +153,7 @@ function ProductPage() {
                 <button type="button" onClick={() => setQty((q) => q + 1)} aria-label="Increase" className="px-4 py-2 hover:bg-[var(--sage)]/20 text-lg font-light">+</button>
               </div>
             </div>
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
               <button
                 onClick={() => setShowDownload(true)}
                 className="flex items-center justify-center gap-2 rounded-full border-2 border-[var(--ink)] text-[var(--ink)] text-[11px] sm:text-xs font-bold tracking-widest uppercase py-3 hover:bg-[var(--ink)] hover:text-[var(--ivory)] transition-colors"
@@ -168,6 +168,13 @@ function ProductPage() {
               >
                 <WhatsAppIcon /> Enquire
               </a>
+              <Link
+                to="/quote"
+                search={{ design: product.title }}
+                className="sm:col-span-1 col-span-2 flex items-center justify-center gap-2 rounded-full border-2 border-[var(--navy)] text-[var(--navy)] text-[11px] sm:text-xs font-bold tracking-widest uppercase py-3 hover:bg-[var(--navy)] hover:text-[var(--ivory)] transition-colors"
+              >
+                <QuoteIcon /> {t("quote.product_cta")}
+              </Link>
             </div>
             <p className="text-[11px] text-center text-muted-foreground pt-1">
               We dispatch as one carton · single-piece orders not accepted
