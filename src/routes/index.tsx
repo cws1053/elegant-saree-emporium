@@ -259,14 +259,22 @@ function Wholesale() {
             <p className="text-[var(--ivory)]/70 text-sm sm:text-base max-w-xl mx-auto leading-relaxed mb-8">
               {t("wholesale.body")}
             </p>
-            <a
-              href={waLink("Namaste Devrani, I'd like to register as a retail partner.")}
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center gap-2 rounded-full bg-[var(--gold)] text-[var(--ink)] px-8 py-4 text-[11px] sm:text-xs uppercase tracking-[0.2em] font-bold hover:bg-[var(--rose)] transition-colors hover-scale"
-            >
-              {t("wholesale.cta")}
-            </a>
+            <div className="flex flex-wrap justify-center gap-3">
+              <a
+                href={waLink("Namaste Devrani, I'd like to register as a retail partner.")}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-2 rounded-full bg-[var(--gold)] text-[var(--ink)] px-8 py-4 text-[11px] sm:text-xs uppercase tracking-[0.2em] font-bold hover:bg-[var(--rose)] transition-colors hover-scale"
+              >
+                {t("wholesale.cta")}
+              </a>
+              <Link
+                to="/quote"
+                className="inline-flex items-center gap-2 rounded-full border border-[var(--ivory)]/60 text-[var(--ivory)] px-8 py-4 text-[11px] sm:text-xs uppercase tracking-[0.2em] font-bold hover:bg-[var(--ivory)] hover:text-[var(--ink)] transition-colors"
+              >
+                {t("quote.cta_card")}
+              </Link>
+            </div>
           </div>
         </div>
 

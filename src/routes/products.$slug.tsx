@@ -153,7 +153,7 @@ function ProductPage() {
                 <button type="button" onClick={() => setQty((q) => q + 1)} aria-label="Increase" className="px-4 py-2 hover:bg-[var(--sage)]/20 text-lg font-light">+</button>
               </div>
             </div>
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
               <button
                 onClick={() => setShowDownload(true)}
                 className="flex items-center justify-center gap-2 rounded-full border-2 border-[var(--ink)] text-[var(--ink)] text-[11px] sm:text-xs font-bold tracking-widest uppercase py-3 hover:bg-[var(--ink)] hover:text-[var(--ivory)] transition-colors"
@@ -167,6 +167,12 @@ function ProductPage() {
                 className="flex items-center justify-center gap-2 rounded-full bg-[var(--ink)] text-[var(--ivory)] text-[11px] sm:text-xs font-bold tracking-widest uppercase py-3 hover:bg-[#25D366] transition-colors"
               >
                 <WhatsAppIcon /> Enquire
+              </a>
+              <a
+                href={`/quote?design=${encodeURIComponent(product.title)}`}
+                className="sm:col-span-1 col-span-2 flex items-center justify-center gap-2 rounded-full border-2 border-[var(--navy)] text-[var(--navy)] text-[11px] sm:text-xs font-bold tracking-widest uppercase py-3 hover:bg-[var(--navy)] hover:text-[var(--ivory)] transition-colors"
+              >
+                <QuoteIcon /> {t("quote.product_cta")}
               </a>
             </div>
             <p className="text-[11px] text-center text-muted-foreground pt-1">
@@ -295,4 +301,14 @@ function ShieldIcon() {
 }
 function BoxIcon() {
   return <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.8"><path d="M21 16V8l-9-5-9 5v8l9 5 9-5z" /><path d="M3 8l9 5 9-5" /><path d="M12 13v10" /></svg>;
+}
+function QuoteIcon() {
+  return (
+    <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+      <polyline points="14 2 14 8 20 8" />
+      <line x1="8" y1="13" x2="16" y2="13" />
+      <line x1="8" y1="17" x2="13" y2="17" />
+    </svg>
+  );
 }

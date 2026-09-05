@@ -21,6 +21,7 @@ export function Nav() {
   const { t } = useI18n();
   const links: { to: string; label: string; internal?: boolean }[] = [
     { to: "/catalogue", label: t("nav.catalogue"), internal: true },
+    { to: "/quote", label: t("nav.quote"), internal: true },
     { to: "/#craft", label: t("nav.craft") },
     { to: "/#wholesale", label: t("nav.wholesale") },
     { to: "/#enquire", label: t("nav.contact") },
@@ -46,6 +47,12 @@ export function Nav() {
         </nav>
         <div className="flex items-center gap-2">
           <LanguageSwitcher />
+          <Link
+            to="/quote"
+            className="hidden sm:inline-flex items-center gap-2 rounded-full bg-[var(--navy)] text-[var(--ivory)] px-4 py-2 text-xs sm:text-sm tracking-wide hover:bg-[var(--gold)] hover:text-[var(--ink)] transition-colors font-bold"
+          >
+            {t("nav.quote")}
+          </Link>
           <a
             href={waLink("Namaste, I'd like to receive the Devrani catalogue.")}
             target="_blank"
@@ -118,6 +125,7 @@ export function Footer() {
         <div className="space-y-2 text-sm">
           <p className="text-[var(--gold)] uppercase tracking-widest text-xs mb-3">{t("footer.explore")}</p>
           <Link to="/catalogue" className="block hover:text-[var(--rose)]">{t("nav.catalogue")}</Link>
+          <Link to="/quote" className="block hover:text-[var(--rose)]">{t("nav.quote")}</Link>
           <a href="/#craft" className="block hover:text-[var(--rose)]">{t("nav.craft")}</a>
           <a href="/#wholesale" className="block hover:text-[var(--rose)]">{t("nav.wholesale")}</a>
         </div>
