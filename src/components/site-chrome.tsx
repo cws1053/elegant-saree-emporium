@@ -47,6 +47,12 @@ export function Nav() {
         </nav>
         <div className="flex items-center gap-2">
           <LanguageSwitcher />
+          <Link
+            to="/quote"
+            className="hidden sm:inline-flex items-center gap-2 rounded-full bg-[var(--navy)] text-[var(--ivory)] px-4 py-2 text-xs sm:text-sm tracking-wide hover:bg-[var(--gold)] hover:text-[var(--ink)] transition-colors font-bold"
+          >
+            {t("nav.quote")}
+          </Link>
           <a
             href={waLink("Namaste, I'd like to receive the Devrani catalogue.")}
             target="_blank"
