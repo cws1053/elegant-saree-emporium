@@ -5,6 +5,9 @@ import { useI18n } from "@/i18n";
 import { WHATSAPP_DISPLAY } from "@/lib/wa";
 
 export const Route = createFileRoute("/quote")({
+  validateSearch: (search: Record<string, unknown>) => ({
+    design: typeof search.design === "string" ? search.design : undefined,
+  }),
   head: () => ({
     meta: [
       { title: "Request a Quote — Devrani Saree" },
