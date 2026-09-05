@@ -168,13 +168,12 @@ function ProductPage() {
               >
                 <WhatsAppIcon /> Enquire
               </a>
-              <Link
-                to="/quote"
-                search={{ design: product.title }}
+              <a
+                href={`/quote?design=${encodeURIComponent(product.title)}`}
                 className="sm:col-span-1 col-span-2 flex items-center justify-center gap-2 rounded-full border-2 border-[var(--navy)] text-[var(--navy)] text-[11px] sm:text-xs font-bold tracking-widest uppercase py-3 hover:bg-[var(--navy)] hover:text-[var(--ivory)] transition-colors"
               >
                 <QuoteIcon /> {t("quote.product_cta")}
-              </Link>
+              </a>
             </div>
             <p className="text-[11px] text-center text-muted-foreground pt-1">
               We dispatch as one carton · single-piece orders not accepted
